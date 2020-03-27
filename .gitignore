@@ -1,0 +1,20 @@
+### Django ###
+*.pyc
+/db.sqlite3
+.DS_Store
+.env
+
+/staticfiles/*
+/mediafiles/*
+migrations
+__pycache__/
+/.vscode/
+local_settings.py
+*.log
+*.pot
+
+db.sqlite3
+
+#Folders
+.DS_Store
+/resources/uploads/*
