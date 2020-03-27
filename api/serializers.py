@@ -56,7 +56,7 @@ class MaterialSerializer(serializers.ModelSerializer):
         fields = "__all__"
     
 class PreachingSerializer(serializers.ModelSerializer):
-    file = serializers.URLField(source="get_resource_url", read_only=True)
+    file = serializers.URLField(source="get_file_url", read_only=True)
     image = serializers.URLField(source="get_image_url", read_only=True)
 
     class Meta:
