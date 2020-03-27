@@ -20,14 +20,14 @@ class ResourceMixin(models.Model):
         return self.title
 
     def get_file_url(self):
-        domain = Site.objects.get_current().domain
+        domain = Site.objects.get(name="production").domain
         path = self.file.url
-        return f"http://{domain}{path}"
+        return f"{domain}{path}"
     
     def get_image_url(self):
-        domain = Site.objects.get_current().domain
+        domain = Site.objects.get(name="production").domain
         path = self.image.url
-        return f"http://{domain}{path}"
+        return f"{domain}{path}"
 
 class Photo(ResourceMixin):
     file  = models.FileField(upload_to="uploads/photos")
