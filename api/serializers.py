@@ -25,7 +25,7 @@ class ChurchInfoSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class DailyDevotionSerializer(serializers.ModelSerializer):
-    
+    image = serializers.URLField(source="get_image_url", read_only=True)
     class Meta:
         model = DailyDevotion
         fields = "__all__"
@@ -50,7 +50,7 @@ class VideoSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class MaterialSerializer(serializers.ModelSerializer):
-    
+    image = serializers.URLField(source="get_image_url", read_only=True)
     class Meta:
         model = Material
         fields = "__all__"

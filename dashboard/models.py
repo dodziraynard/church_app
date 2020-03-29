@@ -83,7 +83,10 @@ class DailyDevotion(models.Model):
     description = models.TextField() 
     verse       = models.CharField(max_length=100)
 
-
+    def get_image_url(self):
+        domain = Site.objects.get(name="production").domain
+        path = self.image.url
+        return f"{domain}{path}"
     def __str__(self):
         return self.title
 

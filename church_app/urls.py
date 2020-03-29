@@ -10,6 +10,11 @@ urlpatterns = [
     path('api/', include("api.urls")),
 ]
 
+admin.site.site_header = "CHURCH - DATABASE ADMINISTRATOR"
+admin.site.index_title = "TABLES"                   
+admin.site.site_title =  'Super User'               
+
+
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,
                           document_root=settings.STATIC_ROOT)

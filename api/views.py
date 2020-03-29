@@ -77,17 +77,22 @@ class PreachingsAPI(APIView):
     permission_classes  = [permissions.AllowAny]
     serializer_class    = PreachingSerializer
 
-    # def get(self, request, *args, **kwargs):
-    #     preachings = Preaching.objects.all().order_by("-id")
-
-    #     return Response({
-    #             "preachings": PreachingSerializer(preachings, context=self.get_serializer_context()).data,
-    #         })
-
     def get(self, request):
         preachings = Preaching.objects.all().order_by("-id")
         data = self.serializer_class(preachings, many=True).data
         return Response({"preachings": data})
+
+class DevotionsAPI(APIView):
+    permission_classes  = [permissions.AllowAny]
+    serializer_class    = DailyDevotionSerializer
+
+    def post(self, request, *args, **kwargs):
+        previous_id = request.POST.get("previous_id")
+        print("previous id "+previous_id)
+        d = DailyDevotion.objects.filter(id__gt=previous_id).order_by("-id").first()
+        devotions = DailyDevotion.objects.filter(id=d.id)
+        data = self.serializer_class(devotions, many=True).data
+        return Response({"devotions": data})
 
 
 class PhotosAPI(generics.ListAPIView):
