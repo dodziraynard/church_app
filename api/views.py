@@ -88,8 +88,15 @@ class DevotionsAPI(APIView):
 
     def post(self, request, *args, **kwargs):
         previous_id = request.POST.get("previous_id")
-        print("previous id "+previous_id)
-        d = DailyDevotion.objects.filter(id__gt=previous_id).order_by("-id").first()
+        if previous_id:
+            d = DailyDevotion.objects.filter(id__gt=previous_id).order_by("-id").first()
+            if d:
+                devotions = DailyDevotion.objects.filter(id=d.id)
+            else:
+                d = DailyDevotion.objects.all().order_by("-id").first()
+        else:
+            d = DailyDevotion.objects.all().order_by("-id").first()
+        
         devotions = DailyDevotion.objects.filter(id=d.id)
         data = self.serializer_class(devotions, many=True).data
         return Response({"devotions": data})
