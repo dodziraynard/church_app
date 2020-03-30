@@ -7,7 +7,7 @@ urlpatterns = [
     path("leaders", views.LeadersAPI.as_view()),
     path("videos", views.VideosAPI.as_view()),
     path("church", views.ChurchAPI.as_view()),
-    path("daily-devotion", views.DevotionsAPI.as_view(),  name="devotions"),
+    path("devotion", views.DevotionsAPI.as_view(),  name="devotions"),
     path("notifications", views.NotificationsAPI.as_view()),
     path("materials", views.MaterialsAPI.as_view()),
     path("preachings", views.PreachingsAPI.as_view(), name="preachings"),
