@@ -68,7 +68,7 @@ class NotificationsAPI(APIView):
             notifications = Notification.objects.filter(id__gt=prev,
                             church=request.user.profile.church).order_by("-id")
         else:
-            notifications = Notification.objects.all().order_by("-id")[:5]
+            notifications = Notification.objects.filter(church=request.user.profile.church).order_by("-id")[:5]
         data = self.serializer_class(notifications, many=True).data
         return Response({"notifications": data})
 
