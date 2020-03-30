@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "692759591326",
+    "firebase_url": "https://church-app-b1fdd.firebaseio.com",
+    "project_id": "church-app-b1fdd",
+    "storage_bucket": "church-app-b1fdd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692759591326:android:ed019f3f91a03391de3e8f",
+        "android_client_info": {
+          "package_name": "com.idea.church"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "692759591326-rcdgkqrj17g392tumr0c8mog2ni4rbgd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEDb6qj9ufUwwdt7g2VuMgh-rQIVWJjN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "692759591326-rcdgkqrj17g392tumr0c8mog2ni4rbgd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
