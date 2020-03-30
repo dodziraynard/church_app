@@ -2,7 +2,7 @@ from rest_framework_jwt.settings import api_settings
 from rest_framework import serializers
 from dashboard.models import (
             Leader,
-            ChurchInfo,
+            Church,
             DailyDevotion,
             Notification,
             Preaching,
@@ -18,10 +18,10 @@ class LeaderSerializer(serializers.ModelSerializer):
         model = Leader
         fields = "__all__"
     
-class ChurchInfoSerializer(serializers.ModelSerializer):
+class ChurchSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = ChurchInfo
+        model = Church
         fields = "__all__"
 
 class DailyDevotionSerializer(serializers.ModelSerializer):
@@ -44,13 +44,16 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = "__all__"
     
 class VideoSerializer(serializers.ModelSerializer):
-    
+    file = serializers.URLField(source="get_file_url", read_only=True)
+    image = serializers.URLField(source="get_image_url", read_only=True)
     class Meta:
         model = Video
         fields = "__all__"
 
 class MaterialSerializer(serializers.ModelSerializer):
+    file = serializers.URLField(source="get_file_url", read_only=True)
     image = serializers.URLField(source="get_image_url", read_only=True)
+
     class Meta:
         model = Material
         fields = "__all__"

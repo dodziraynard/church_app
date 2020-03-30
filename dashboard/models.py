@@ -4,11 +4,13 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.contrib.sites.models import Site
 
+
 class ResourceMixin(models.Model):
     title  = models.CharField(max_length=100)
     desc  = models.TextField(null=True, blank=True)
     date  = models.DateTimeField(default=timezone.now)
     image  = models.ImageField(upload_to="uploads/images", blank=True, null=True)
+    church = models.ForeignKey("Church", on_delete=models.CASCADE) 
 
     class Meta:
         abstract = True
@@ -48,11 +50,7 @@ class Leader(models.Model):
     contacts    = models.CharField(max_length=50)
     date        = models.DateTimeField(default=timezone.now)
     inactive    = models.DateTimeField(null=True, blank=True)
-    # full_name   = models.CharField(max_length=100)
-
-    # def save(self):
-    #     self.full_name = self.user.profile.full_name
-    #     super()
+    church = models.ForeignKey("Church", on_delete=models.CASCADE) 
 
     def __str__(self):
         return self.position
@@ -60,44 +58,40 @@ class Leader(models.Model):
     def __unicode__(self):
         return self.position
 
-class ChurchInfo(models.Model):
+class Church(models.Model):
+    name           = models.CharField(max_length=100)
     about          = models.TextField()
     address        = models.TextField()
     head_pastor    = models.CharField(max_length=100) 
     help_text      = models.TextField()
 
-    class Meta:
-        verbose_name_plural = "Church Info"
-
-
     def __str__(self):
-        return "Church Info"
+        return self.name
 
     def __unicode__(self):
-        return "Church Info"
-
+        return self.name
 
 class DailyDevotion(models.Model):
-    title       = models.CharField(max_length=100)
     image       = models.ImageField(upload_to="uploads/Devotions")
-    description = models.TextField() 
+    content = models.TextField() 
     verse       = models.CharField(max_length=100)
+    church = models.ForeignKey("Church", on_delete=models.CASCADE) 
 
     def get_image_url(self):
         domain = Site.objects.get(name="production").domain
         path = self.image.url
         return f"{domain}{path}"
     def __str__(self):
-        return self.title
+        return self.verse
 
     def __unicode__(self):
-        return self.title
+        return self.verse
 
 class Notification(models.Model):
     title   = models.CharField(max_length=100)
     message = models.TextField()
     date    = models.DateTimeField(default=timezone.now)
-    user    = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL) 
+    church = models.ForeignKey("Church", on_delete=models.CASCADE) 
 
     def __str__(self):
         return self.title

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from . models import (
     Leader,
-    ChurchInfo,
+    Church,
     DailyDevotion,
     Notification,
     Preaching,
@@ -11,9 +11,10 @@ from . models import (
 )
 
 admin.site.register(Leader)
-admin.site.register(ChurchInfo)
+admin.site.register(Church)
 admin.site.register(DailyDevotion)
 admin.site.register(Preaching)
 admin.site.register(Video)
 admin.site.register(Material)
 admin.site.register(Photo)
+admin.site.register(Notification)
