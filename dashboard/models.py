@@ -9,7 +9,7 @@ class ResourceMixin(models.Model):
     title  = models.CharField(max_length=100)
     desc  = models.TextField(null=True, blank=True)
     date  = models.DateTimeField(default=timezone.now)
-    image  = models.ImageField(upload_to="uploads/images", blank=True, null=True)
+    image  = models.ImageField(upload_to="uploads/images")
     church = models.ForeignKey("Church", on_delete=models.CASCADE) 
 
     class Meta:
@@ -44,6 +44,14 @@ class Video(ResourceMixin):
 class Material(ResourceMixin):
     file  = models.FileField(upload_to="uploads/materials")
 
+    def save(self, *args, **kwargs):
+        self.file.name = self.title+"."+self.file.name.split(".")[-1]
+        super(Material, self).save(*args, **kwargs)
+    
+    def update(self, *args, **kwargs):
+        self.file.name = self.title+"."+self.file.name.split(".")[-1]
+        super(Material, self).update(*args, **kwargs)
+    
 class Leader(models.Model):
     position    = models.CharField(max_length=100)
     user        = models.ForeignKey(User, on_delete=models.CASCADE) 
