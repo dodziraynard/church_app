@@ -13,6 +13,8 @@ from dashboard.models import (
 from account.models import Profile
 
 class LeaderSerializer(serializers.ModelSerializer):
+    full_name = serializers.CharField(source="get_full_name", read_only=True)
+    image = serializers.URLField(source="get_image_url", read_only=True)
     
     class Meta:
         model = Leader

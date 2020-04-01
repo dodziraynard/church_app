@@ -60,6 +60,14 @@ class Leader(models.Model):
     inactive    = models.DateTimeField(null=True, blank=True)
     church = models.ForeignKey("Church", on_delete=models.CASCADE) 
 
+    def get_full_name(self):
+        return self.user.profile.full_name
+
+    def get_image_url(self):
+        domain = Site.objects.get(name="production").domain
+        path = self.user.profile.image.url
+        return f"{domain}{path}"
+
     def __str__(self):
         return self.position
 

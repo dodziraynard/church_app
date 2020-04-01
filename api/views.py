@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from account.forms import UserLoginForm, UserProfileForm, UserRegistrationForm
 from knox.models import AuthToken
 from rest_framework.viewsets import ModelViewSet     
+from django.db.models import Q
 
 
 from dashboard.models import (
@@ -47,7 +48,13 @@ class VideosAPI(APIView):
     serializer_class    = VideoSerializer
 
     def get(self, request, *args, **kwargs):
+        query = request.GET.get("query")
         videos = Video.objects.filter(church=request.user.profile.church).order_by("-id")
+        if query:
+            videos = videos.filter(
+                Q(title__icontains=query) |
+                Q(desc__icontains=query)
+            )
         data = self.serializer_class(videos, many=True).data
         return Response({"videos": data})
 
@@ -77,7 +84,13 @@ class MaterialsAPI(APIView):
     serializer_class    = MaterialSerializer
 
     def get(self, request, *args, **kwargs):
+        query = request.GET.get("query")
         materials = Material.objects.filter(church=request.user.profile.church).order_by("-id")
+        if query:
+            materials = materials.filter(
+                Q(title__icontains=query) |
+                Q(desc__icontains=query)
+            )
         data = self.serializer_class(materials, many=True).data
         return Response({"materials": data})
 
@@ -85,7 +98,13 @@ class PreachingsAPI(APIView):
     serializer_class    = PreachingSerializer
 
     def get(self, request):
+        query = request.GET.get("query")
         preachings = Preaching.objects.filter(church=request.user.profile.church).order_by("-id")
+        if query:
+            preachings = preachings.filter(
+                Q(title__icontains=query) |
+                Q(desc__icontains=query)
+            )
         data = self.serializer_class(preachings, many=True).data
         return Response({"preachings": data})
 
