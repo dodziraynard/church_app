@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.contrib.sites.models import Site
-
+from .utils import send_notification
 
 class ResourceMixin(models.Model):
     title  = models.CharField(max_length=100)
@@ -38,8 +38,18 @@ class Preaching(ResourceMixin):
     preacher = models.CharField(max_length=100)
     file   = models.FileField(upload_to="uploads/preachings")
 
+    def save(self, *args, **kwargs):
+        super(Preaching, self).save(*args, **kwargs)
+        send_notification("New Preaching", 
+                f"New preaching has been added, open 'Preachings' to listen; 'Title: {self.title}'")
+
 class Video(ResourceMixin):
     file  = models.FileField(upload_to="uploads/videos")
+
+    def save(self, *args, **kwargs):
+        super(Video, self).save(*args, **kwargs)
+        send_notification("New Video", 
+                f"New video has been added, open 'Videos' to listen; 'Title: {self.title}'")
 
 class Material(ResourceMixin):
     file  = models.FileField(upload_to="uploads/materials")
@@ -47,7 +57,9 @@ class Material(ResourceMixin):
     def save(self, *args, **kwargs):
         self.file.name = self.title+"."+self.file.name.split(".")[-1]
         super(Material, self).save(*args, **kwargs)
-    
+        send_notification("New Material", 
+                f"New book has been added, open 'Library' to view; 'Title: {self.title}'")
+
     def update(self, *args, **kwargs):
         self.file.name = self.title+"."+self.file.name.split(".")[-1]
         super(Material, self).update(*args, **kwargs)
@@ -93,6 +105,11 @@ class DailyDevotion(models.Model):
     verse       = models.CharField(max_length=100)
     church = models.ForeignKey("Church", on_delete=models.CASCADE) 
 
+    def save(self, *args, **kwargs):
+        super(DailyDevotion, self).save(*args, **kwargs)
+        send_notification("Daily Devotion", 
+                self.content)
+
     def get_image_url(self):
         domain = Site.objects.get(name="production").domain
         path = self.image.url
@@ -108,6 +125,10 @@ class Notification(models.Model):
     message = models.TextField()
     date    = models.DateTimeField(default=timezone.now)
     church = models.ForeignKey("Church", on_delete=models.CASCADE) 
+
+    def save(self, *args, **kwargs):
+        super(Notification, self).save(*args, **kwargs)
+        send_notification(self.title, self.message)
 
     def __str__(self):
         return self.title
