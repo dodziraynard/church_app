@@ -33,6 +33,7 @@ class DailyDevotionSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class NotificationSerializer(serializers.ModelSerializer):
+    date = serializers.CharField(source="get_readable_date", read_only=True)
     
     class Meta:
         model = Notification
@@ -48,6 +49,8 @@ class ProfileSerializer(serializers.ModelSerializer):
 class VideoSerializer(serializers.ModelSerializer):
     file = serializers.URLField(source="get_file_url", read_only=True)
     image = serializers.URLField(source="get_image_url", read_only=True)
+    date = serializers.CharField(source="get_readable_date", read_only=True)
+
     class Meta:
         model = Video
         fields = "__all__"
@@ -55,6 +58,7 @@ class VideoSerializer(serializers.ModelSerializer):
 class MaterialSerializer(serializers.ModelSerializer):
     file = serializers.URLField(source="get_file_url", read_only=True)
     image = serializers.URLField(source="get_image_url", read_only=True)
+    date = serializers.CharField(source="get_readable_date", read_only=True)
 
     class Meta:
         model = Material
@@ -63,7 +67,8 @@ class MaterialSerializer(serializers.ModelSerializer):
 class PreachingSerializer(serializers.ModelSerializer):
     file = serializers.URLField(source="get_file_url", read_only=True)
     image = serializers.URLField(source="get_image_url", read_only=True)
-
+    date = serializers.CharField(source="get_readable_date", read_only=True)
+    
     class Meta:
         model = Preaching
         fields = "__all__"

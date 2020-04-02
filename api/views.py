@@ -5,7 +5,8 @@ from account.forms import UserLoginForm, UserProfileForm, UserRegistrationForm
 from knox.models import AuthToken
 from rest_framework.viewsets import ModelViewSet     
 from django.db.models import Q
-
+from datetime import datetime, timedelta
+from django.utils.timezone import make_aware
 
 from dashboard.models import (
         Leader,
@@ -70,12 +71,12 @@ class NotificationsAPI(APIView):
     serializer_class    = NotificationSerializer
 
     def get(self, request, *args, **kwargs):
-        prev = request.GET.get("prev")
-        if prev:
-            notifications = Notification.objects.filter(id__gt=prev,
-                            church=request.user.profile.church).order_by("-id")
-        else:
-            notifications = Notification.objects.filter(church=request.user.profile.church).order_by("-id")[:5]
+        date_five_days_ago = datetime.now() - timedelta(days=5)
+        # date = make_aware(datetime.strptime(datetime.strftime(date_five_days_ago), '%Y-%m-%dT%H:%M'))
+
+        notifications = Notification.objects.filter(church=request.user.profile.church,
+                                        date__gte=date_five_days_ago
+                                        ).order_by("-id")
         data = self.serializer_class(notifications, many=True).data
         return Response({"notifications": data})
 

@@ -21,6 +21,9 @@ class ResourceMixin(models.Model):
     def __unicode__(self):
         return self.title
 
+    def get_readable_date(self):
+        return self.date.strftime("%a, %B %d. %I:%M %p")
+        
     def get_file_url(self):
         domain = Site.objects.get(name="production").domain
         path = self.file.url
@@ -125,6 +128,9 @@ class Notification(models.Model):
     message = models.TextField()
     date    = models.DateTimeField(default=timezone.now)
     church = models.ForeignKey("Church", on_delete=models.CASCADE) 
+
+    def get_readable_date(self):
+        return self.date.strftime("%a, %B %d. %I:%M %p")
 
     def save(self, *args, **kwargs):
         super(Notification, self).save(*args, **kwargs)
