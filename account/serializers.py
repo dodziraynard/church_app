@@ -30,16 +30,12 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data.pop('id', None)
         password = validated_data.pop('password', None)
-        
-        church_id = validated_data.pop("church_id", None)
-        full_name = validated_data.pop("full_name", None)
-        mobile = validated_data.pop("mobile", None)
 
         user = self.Meta.model(**validated_data)
         if password:
             user.set_password(password)
             user.save()
-            profile = Profile.objects.create(user=user, church_id=church_id, full_name=full_name, mobile=mobile)
+            profile = Profile.objects.create(user=user)
         return user
 
 # Login Serializer
