@@ -218,7 +218,7 @@ class UserProfileAPI(APIView):
         return Response({"profile": [data]})
     
     def post(self, request, *args, **kwargs):
-        full_name = request.POST.get("fullName")
+        full_name = request.POST.get("full_name")
         email = request.POST.get("email")
         mobile = request.POST.get("mobile")
 
