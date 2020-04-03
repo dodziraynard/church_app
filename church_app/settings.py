@@ -1,5 +1,7 @@
 import os
 from . import local_settings
+from datetime import timedelta
+from rest_framework.settings import api_settings
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,6 +25,7 @@ INSTALLED_APPS = [
     'corsheaders',  
     'knox',
     'rest_framework',
+    # 'ckeditor',
 
     # Custom Apps
     'dashboard',
@@ -37,6 +40,7 @@ REST_FRAMEWORK = {
     
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
 }
+
 SITE_ID = 1
 CORS_ORIGIN_ALLOW_ALL = True
 

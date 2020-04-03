@@ -12,7 +12,7 @@ urlpatterns = [
     path("materials", views.MaterialsAPI.as_view()),
     path("preachings", views.PreachingsAPI.as_view(), name="preachings"),
     path("photos", views.PhotosAPI.as_view()),
-    # path("profile", views.ProfileAPI.as_view()),
+    path("profile", views.UserProfileAPI.as_view()),
 
     # users
     path('auth/register', views.RegisterAPI.as_view()),

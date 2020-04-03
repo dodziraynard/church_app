@@ -95,6 +95,7 @@ class Church(models.Model):
     address        = models.TextField()
     head_pastor    = models.CharField(max_length=100) 
     help_text      = models.TextField()
+    church_id      = models.CharField(max_length=15, default="1")
 
     def __str__(self):
         return self.name
@@ -141,3 +142,4 @@ class Notification(models.Model):
 
     def __unicode__(self):
         return self.title
+    

@@ -5,17 +5,20 @@ from . models import Profile
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    church = serializers.CharField(source="get_church", read_only=True)
+    username = serializers.CharField(source="get_username", read_only=True)
+    email    = serializers.CharField(source="get_email", read_only=True)
+    image = serializers.URLField(source="get_image_url", read_only=True)
+    
     class Meta:
         model = Profile
-        fields = ["id", "mobile"]
+        fields = "__all__"
 
 # User Serializeer
 class UserSerializer(serializers.ModelSerializer):
-    profile = ProfileSerializer(required=False, read_only=True)
-
     class Meta:
         model = User
-        fields = ["id", "username", "email", "is_superuser", "profile"]
+        fields = ["id", "username", "email", "is_superuser"]
 
 # Register Serializer
 class RegisterSerializer(serializers.ModelSerializer):

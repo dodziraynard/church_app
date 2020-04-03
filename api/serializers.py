@@ -38,13 +38,6 @@ class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
         fields = "__all__"
-
-
-class ProfileSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = Profile
-        fields = "__all__"
     
 class VideoSerializer(serializers.ModelSerializer):
     file = serializers.URLField(source="get_file_url", read_only=True)

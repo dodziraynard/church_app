@@ -24,17 +24,20 @@ from . serializers import (
         ChurchSerializer,
         DailyDevotionSerializer,
         NotificationSerializer,
-        ProfileSerializer,
         VideoSerializer,
         MaterialSerializer,
         PreachingSerializer,
         PhotoSerializer,
     )
 
+from account.models import (
+    Profile
+)
 from account.serializers import (
         UserSerializer,
         RegisterSerializer,
         LoginSerializer,
+        ProfileSerializer,
 )
 
 class LeadersAPI(APIView):
@@ -72,14 +75,11 @@ class NotificationsAPI(APIView):
 
     def get(self, request, *args, **kwargs):
         date_five_days_ago = datetime.now() - timedelta(days=5)
-        # date = make_aware(datetime.strptime(datetime.strftime(date_five_days_ago), '%Y-%m-%dT%H:%M'))
-
         notifications = Notification.objects.filter(church=request.user.profile.church,
                                         date__gte=date_five_days_ago
                                         ).order_by("-id")
         data = self.serializer_class(notifications, many=True).data
         return Response({"notifications": data})
-
 
 class MaterialsAPI(APIView):
     serializer_class    = MaterialSerializer
@@ -126,7 +126,6 @@ class PhotosAPI(APIView):
         data = self.serializer_class(photos, many=True).data
         return Response({"photos": data})
 
-
 # USERS
 # Register API
 class RegisterAPI(generics.GenericAPIView):
@@ -137,9 +136,20 @@ class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 
     def post(self, request, *args, **kwargs):
+        church_id = request.POST.get("church_id")
+        full_name = request.POST.get("full_name")
+        mobile = request.POST.get("mobile")
+
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+
+        profile  = request.user.profile
+        profile.church.church_id = church_id
+        profile.full_name = full_name
+        profile.mobile = mobile
+        profile.save()
+
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "token": AuthToken.objects.create(user)[1]
@@ -197,14 +207,30 @@ class UserAPI(APIView):
         return Response({"user": data})
 
 # UserProfile API
-class UserProfileAPI(ModelViewSet):
+class UserProfileAPI(APIView):
     """
     API endpoint by which an authenticated user can view his/her profile
     """
     serializer_class = ProfileSerializer         
 
-    def get_queryset(self):
-        return Profile.objects.filter(user=self.request.user)
+    def get(self, request):
+        data = self.serializer_class(request.user.profile).data
+        return Response({"profile": [data]})
+    
+    def post(self, request, *args, **kwargs):
+        full_name = request.POST.get("fullName")
+        email = request.POST.get("email")
+        mobile = request.POST.get("mobile")
 
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        # update user's info
+        profile  = request.user.profile
+        profile.full_name = full_name
+        profile.mobile = mobile
+        profile.save()
+
+        # Update user's email
+        request.user.email = email
+        request.user.save()
+
+        data = self.serializer_class(request.user.profile).data
+        return Response({"profile": [data]})
