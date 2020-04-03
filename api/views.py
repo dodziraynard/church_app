@@ -7,7 +7,6 @@ from rest_framework.viewsets import ModelViewSet
 from django.db.models import Q
 from datetime import datetime, timedelta
 from django.utils.timezone import make_aware
-
 from dashboard.models import (
         Leader,
         Church,
@@ -17,6 +16,7 @@ from dashboard.models import (
         Video,
         Material,
         Photo,
+        Feedback,
     )
 
 from . serializers import (
@@ -28,6 +28,9 @@ from . serializers import (
         MaterialSerializer,
         PreachingSerializer,
         PhotoSerializer,
+        TestimonySerializer,
+        PrayerRequestSerializer,
+        FeedbackSerializer
     )
 
 from account.models import (
@@ -125,6 +128,34 @@ class PhotosAPI(APIView):
         photos = Photo.objects.filter(church=request.user.profile.church).order_by("-id")
         data = self.serializer_class(photos, many=True).data
         return Response({"photos": data})
+
+class TestimonyAPI(ModelViewSet):
+    serializer_class = TestimonySerializer
+
+    def get_queryset(self):
+        return self.request.user.testimonies
+    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class PrayerRequestAPI(ModelViewSet):
+    serializer_class = PrayerRequestSerializer
+
+    def get_queryset(self):
+        return self.request.user.prayer_requests
+    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class FeedbackAPI(ModelViewSet):
+    serializer_class = FeedbackSerializer
+
+    def get_queryset(self):
+        return Feedback.objects.all()
+    
+    def perform_create(self, serializer):
+        if self.request.user.is_authenticated:
+            serializer.save(user=self.request.user)
 
 # USERS
 # Register API

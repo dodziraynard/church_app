@@ -42,6 +42,7 @@ class Preaching(ResourceMixin):
     file   = models.FileField(upload_to="uploads/preachings")
 
     def save(self, *args, **kwargs):
+        self.file.name = self.title+"."+self.file.name.split(".")[-1]
         super(Preaching, self).save(*args, **kwargs)
         send_notification("New Preaching", 
                 f"New preaching has been added, open 'Preachings' to listen; 'Title: {self.title}'")
@@ -50,6 +51,7 @@ class Video(ResourceMixin):
     file  = models.FileField(upload_to="uploads/videos")
 
     def save(self, *args, **kwargs):
+        self.file.name = self.title+"."+self.file.name.split(".")[-1]
         super(Video, self).save(*args, **kwargs)
         send_notification("New Video", 
                 f"New video has been added, open 'Videos' to listen; 'Title: {self.title}'")
@@ -143,3 +145,26 @@ class Notification(models.Model):
     def __unicode__(self):
         return self.title
     
+class Testimony(models.Model):
+    user  = models.ForeignKey(User, on_delete=models.CASCADE, related_name="testimonies")
+    testimony = models.TextField()
+    date        = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.user.username
+
+class PrayerRequest(models.Model):
+    user  = models.ForeignKey(User, on_delete=models.CASCADE, related_name="prayer_requests")
+    request = models.TextField()
+    date        = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.user.username
+
+class Feedback(models.Model):
+    user  = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, related_name="feedbacks")
+    feedback = models.TextField()
+    date        = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.message

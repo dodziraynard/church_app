@@ -9,6 +9,9 @@ from dashboard.models import (
             Video,
             Material,
             Photo,
+            Testimony,
+            PrayerRequest,
+            Feedback
         )
 from account.models import Profile
 
@@ -71,3 +74,18 @@ class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
         fields = "__all__"
+
+class TestimonySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Testimony
+        fields = ["testimony"]
+
+class PrayerRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PrayerRequest
+        fields = ["request"]
+
+class FeedbackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Feedback
+        fields = ["feedback"]
