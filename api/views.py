@@ -144,7 +144,7 @@ class RegisterAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
-        profile  = request.user.profile
+        profile  = user.profile
         profile.church.church_id = church_id
         profile.full_name = full_name
         profile.mobile = mobile
