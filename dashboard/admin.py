@@ -7,7 +7,10 @@ from . models import (
     Preaching,
     Video,
     Material,
-    Photo
+    Photo,
+    Testimony,
+    PrayerRequest,
+    Feedback,
 )
 
 admin.site.register(Leader)
@@ -18,3 +21,6 @@ admin.site.register(Video)
 admin.site.register(Material)
 admin.site.register(Photo)
 admin.site.register(Notification)
+admin.site.register(Testimony)
+admin.site.register(PrayerRequest)
+admin.site.register(Feedback)
