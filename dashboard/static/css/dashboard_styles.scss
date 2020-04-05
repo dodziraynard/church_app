@@ -3,26 +3,35 @@
 .page{
     display: flex;
     padding: 0;
+    margin: 0;
     background-color: $shadow;
-    min-height: 100vh;
+    min-height: 105vh;
+}
+
+.row{
+    margin: 0px;
+    padding: 0px;
 }
 
 //sidebar
 .sidebar{
-    width: 200px;
+    min-width: 200px;
     overflow-x: hidden;
-    transition: width .4s ease-in-out;
+    transition: all .4s ease-in-out;
     background-color: rgb(35, 35, 35);
     height: 100vh;
     overflow-y: auto;
+    position: sticky;
+    top: -5px;
 
     .header{
         height: 50px;
-        background-color: white;
+        background-color: rgb(240, 244, 248);
     }
 }
 .hide-sidebar{
-    width: 50px;
+    width: 55px;
+    min-width: 55px;
 }
 
 .sidebar-item{
@@ -68,6 +77,10 @@
         padding: 10px;
         display: flex;
         background-color: white;
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        overflow: hidden;
 
         .navbar-right{
             display: flex;
@@ -85,6 +98,34 @@
     margin: 1%;
     background-color: white;
     border-radius: 10px;
+    overflow: hidden;
+}
+
+.header{
+    width: 100%;
+    padding: 5px;
+    background-color: $shadow;
+}
+
+.section{
+    padding: 5px;
+    min-height: 200px;
+    overflow: auto;
+}
+
+.chat-box{
+    background-color: rgb(246, 233, 248);
+    min-height: 50px;
+    border-bottom-left-radius:50px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    text-align: right;
+    box-shadow: 0xp 0px 5px $shadow;
+}
+
+.center{
+    margin: auto;
+    width: 70%;
 }
 
 /* Ripple effect */

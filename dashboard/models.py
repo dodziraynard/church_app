@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.contrib.sites.models import Site
 from .utils import send_notification
+from ckeditor.fields import RichTextField
 
 class ResourceMixin(models.Model):
     title  = models.CharField(max_length=100)
@@ -107,9 +108,9 @@ class Church(models.Model):
 
 class DailyDevotion(models.Model):
     image       = models.ImageField(upload_to="uploads/Devotions")
-    content = models.TextField() 
+    content     = RichTextField()
     verse       = models.CharField(max_length=100)
-    church = models.ForeignKey("Church", on_delete=models.CASCADE) 
+    church      = models.ForeignKey("Church", on_delete=models.CASCADE) 
 
     def save(self, *args, **kwargs):
         super(DailyDevotion, self).save(*args, **kwargs)
@@ -148,8 +149,9 @@ class Notification(models.Model):
 class Testimony(models.Model):
     user  = models.ForeignKey(User, on_delete=models.CASCADE, related_name="testimonies")
     testimony = models.TextField()
-    date        = models.DateTimeField(default=timezone.now)
-
+    date      = models.DateTimeField(default=timezone.now)
+    viewed      = models.BooleanField(default=False)
+    
     def __str__(self):
         return self.user.username
 
@@ -157,7 +159,8 @@ class PrayerRequest(models.Model):
     user  = models.ForeignKey(User, on_delete=models.CASCADE, related_name="prayer_requests")
     request = models.TextField()
     date        = models.DateTimeField(default=timezone.now)
-
+    viewed      = models.BooleanField(default=False)
+    
     def __str__(self):
         return self.user.username
 

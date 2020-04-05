@@ -2,27 +2,123 @@
 {% block dashboard-active %}sidebar-item-active{% endblock dashboard-active %}
 
 {% block body %}
-<h5>Dashboard</h5>
+<h4>Dashboard</h4>
 
 <div class="row">
-    <div class="col-md-3 col-sm-3 col-xs-6">
-        <div class="card">card</div>
-        
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <div class="card row">
+            <div class="col-md-3 col-sm-3 col-xs-3 badge-primary">
+                <span class="fa fa-users" style="height: 60px; border-radius: 10px; font-size: 1.5em; padding-top: 10px;"></span>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-9">
+                <p>Total Users</p>
+                <p><strong>{{users_count}}</strong></h3>
+            </div>
+        </div>
     </div>
 
-    <div class="col-md-3 col-sm-3 col-xs-6">
-        <div class="card">card</div>
-        
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <div class="card row">
+            <div class="col-md-3 col-sm-3 col-xs-3 badge-secondary">
+                <span class="fa fa-music" style="height: 60px; border-radius: 10px; font-size: 1.5em; padding-top: 10px;"></span>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-9">
+                <p>Preachings</p>
+                <p><strong>{{preachings_count}}</strong></h3>
+            </div>
+        </div>
     </div>
 
-    <div class="col-md-3 col-sm-3 col-xs-6">
-        <div class="card">card</div>
-        
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <div class="card row">
+            <div class="col-md-3 col-sm-3 col-xs-3 badge-info">
+                <span class="fa fa-book" style="height: 60px; border-radius: 10px; font-size: 1.5em; padding-top: 10px;"></span>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-9">
+                <p>Library</p>
+                <p><strong>{{materials_count}}</strong></h3>
+            </div>
+        </div>
     </div>
 
-    <div class="col-md-3 col-sm-3 col-xs-6">
-        <div class="card">card</div>
-        
+    <div class="col-md-3 col-sm-3 col-xs-12">
+        <div class="card row">
+            <div class="col-md-3 col-sm-3 col-xs-3 badge-warning">
+                <span class="fa fa-video-camera" style="height: 60px; border-radius: 10px; font-size: 1.5em; padding-top: 10px;"></span>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-9">
+                <p>Video</p>
+                <p><strong>{{videos_count}}</strong></h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="header"><h4>Requests</h4></div>
+            {% if not prayer_requests %}
+            <div class="section">
+                <h3 class="text text-secondary">No requests found</h3>
+            </div>
+            {% endif %}
+            {% for req in prayer_requests %}
+            <div class="row section">
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <img class="profile-pic" {% if req.user %} src="{{req.user.profile.image.url}}" 
+                                            {% else %} src="/resources/assets/avatar.png" 
+                                            {% endif %} height="45" width="45" alt="profile">
+                </div>
+                <div class="chat-box col-md-10 col-sm-10 col-xs-10">
+                    {{req.request}}
+                    <hr>
+                    <p>~{{req.user.profile.full_name}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="header"><h4>Testimonies</h4></div>
+            {% if not testimonies %}
+            <div class="section">
+                <h3 class="text text-secondary">No Testimony found</h3>
+            </div>
+            {% endif %}
+            {% for testimony in testimonies %}
+            <div class="row section">
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <img class="profile-pic" {% if testimony.user %} src="{{testimony.user.profile.image.url}}" 
+                                            {% else %} src="/resources/assets/avatar.png" 
+                                            {% endif %} height="45" width="45" alt="profile">
+                </div>
+                <div class="chat-box col-md-10 col-sm-10 col-xs-10">
+                    {{testimony.testimony}}
+
+                    <hr>
+                    <p>~{{testimony.user.profile.full_name}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<hr>
+<div class="card center">
+    <div class="header"><h4>Daily Devotion</h4></div>
+    {% if not devotion %}
+        <div class="section">
+            <h3 class="text text-secondary">No Devotion found</h3>
+        </div>
+    {% endif %}
+    <div class="section">
+        {{devotion.content | safe}}
     </div>
 </div>
 {% endblock body %}

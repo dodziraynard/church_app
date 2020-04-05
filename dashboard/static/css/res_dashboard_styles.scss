@@ -1,7 +1,12 @@
 @import "variables.scss";
 
 @media only screen and (max-width: 768px) {
-    .sidebar{
-        
+    .hide-sidebar{
+        width: 0;
+        min-width: 0;
+    }
+
+    .center{
+        width: 95%;
     }
 }

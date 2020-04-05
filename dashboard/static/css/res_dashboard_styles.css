@@ -1,1 +1,10 @@
-/* No CSS *//*# sourceMappingURL=res_dashboard_styles.css.map */
+@media only screen and (max-width: 768px) {
+  .hide-sidebar {
+    width: 0;
+    min-width: 0;
+  }
+  .center {
+    width: 95%;
+  }
+}
+/*# sourceMappingURL=res_dashboard_styles.css.map */
