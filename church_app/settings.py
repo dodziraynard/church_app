@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     'corsheaders',  
     'knox',
     'rest_framework',
-    # 'ckeditor',
+    'ckeditor',
 
     # Custom Apps
     'dashboard',
