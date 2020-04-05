@@ -1,0 +1,150 @@
+.page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+  background-color: whitesmoke;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 200px;
+  overflow-x: hidden;
+  -webkit-transition: width .4s ease-in-out;
+  transition: width .4s ease-in-out;
+  background-color: #232323;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar .header {
+  height: 50px;
+  background-color: white;
+}
+
+.hide-sidebar {
+  width: 50px;
+}
+
+.sidebar-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow-x: hidden;
+  margin: 5px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  color: white;
+  background-color: rgba(255, 255, 255, 0);
+  cursor: pointer;
+  width: 90%;
+  outline: none;
+  border: none;
+}
+
+.sidebar-item .icon {
+  min-width: 35px;
+  font-size: 1.5em;
+  margin-right: 5px;
+}
+
+.sidebar-item:hover {
+  background-color: white;
+  color: #1e1e1e;
+}
+
+.sidebar-item-active {
+  background-color: #2196f3;
+  color: white;
+}
+
+.sidebar-item-active:hover {
+  background-color: #2196f3 !important;
+  color: white !important;
+}
+
+.content {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.content .navbar {
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: white;
+}
+
+.content .navbar .navbar-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  right: 10px;
+}
+
+.content .body {
+  padding: 5px;
+}
+
+.card {
+  margin: 1%;
+  background-color: white;
+  border-radius: 10px;
+}
+
+/* Ripple effect */
+.ripple {
+  background-position: center;
+  -webkit-transition: background 0.8s;
+  transition: background 0.8s;
+}
+
+.ripple:hover {
+  background: whitesmoke radial-gradient(circle, transparent 1%, whitesmoke 1%) center/15000%;
+}
+
+.ripple:active {
+  background-color: #bebebe;
+  background-size: 100%;
+  -webkit-transition: background 0s;
+  transition: background 0s;
+}
+
+.notification-btn {
+  margin-right: 20px;
+  height: 25px;
+  width: 25px;
+  border-radius: 100%;
+  padding: 5px;
+  cursor: pointer;
+  color: black;
+  -webkit-transition: .2s background ease-in-out;
+  transition: .2s background ease-in-out;
+}
+
+.notification-btn:hover {
+  background-color: whitesmoke;
+  color: black;
+}
+
+.notification-btn .notification {
+  background-color: #90d824;
+  color: white;
+  border-radius: 100%;
+  text-align: center;
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  top: -10px;
+}
+
+.profile-pic {
+  border-radius: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0;
+}
+/*# sourceMappingURL=dashboard_styles.css.map */

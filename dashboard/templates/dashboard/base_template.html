@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %} Dashboard {% endblock title %}</title>
+
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/mdb.min.css'%}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/dashboard_styles.css' %}">
+	<link rel="stylesheet" href="{% static 'css/res_dashboard_styles.css' %}">
+</head>
+<body>
+  <div class="page">
+	<div class="sidebar">
+	  <div class="header">
+		<div class="navbar">
+            <a href="">
+                <button class="ripple sidebar-item">
+                    <div class="icon">
+                        <img class="profile-pic" src="/resources/assets/avatar.png" height="45" width="45" alt="">
+                    </div>
+                    <div class="title" style="color: black;"><p>Dashboard</p></div>
+                </button>
+            </a>
+		</div>
+
+		<!-- Items -->
+        <a href="{% url 'dashboard:index' %}" class="">
+            <button class="ripple sidebar-item {% block dashboard-active %} {% endblock dashboard-active %}">
+                <div class="icon"><span class="fa fa-dashboard "></span></div>
+                <div class="title"><p>Dashboard</p></div>
+            </button>
+        </a>
+        
+        <a href="">
+            <button class="ripple sidebar-item {% block notifications-active %} {% endblock notifications-active %}">
+            <div class="icon"><span class="fa fa-bell "></span></div>
+            <div class="title"><p>Notifications</p></div>
+            </button>
+        </a>
+
+        <a href="" class="">
+            <button class="ripple sidebar-item {% block requests-active %} {% endblock requests-active %}">
+            <div class="icon"><span class="fa fa-phone"></span></div>
+            <div class="title"><p>Request</p></div>
+            </button>
+        </a>
+
+        <a href="" class="">
+            <button class="ripple sidebar-item {% block testimonies-active %} {% endblock testimonies-active %}">
+            <div class="icon"><span class="fa fa-paper-plane"></span></div>
+            <div class="title"><p>Testimonies</p></div>
+            </button>
+        </a>
+        <a href="" class="">
+            <button class="ripple sidebar-item {% block devotions-active %} {% endblock devotions-active %}">
+            <div class="icon"><span class="fa fa-newspaper-o"></span></div>
+            <div class="title"><p>Devotions</p></div>
+            </button>
+        </a>
+        <a href="" class="">
+            <button class="ripple sidebar-item {% block video-active %} {% endblock video-active %}">
+            <div class="icon"><span class="fa fa-video-camera"></span></div>
+            <div class="title"><p>Video</p></div>
+            </button>
+        </a>
+        <a href="" class="">
+            <button class="ripple sidebar-item {% block library-active %} {% endblock library-active %}">
+            <div class="icon"><span class="fa fa-book"></span></div>
+            <div class="title"><p>Library</p></div>
+            </button>
+        </a>
+        <a href="" class="">
+            <button class="ripple sidebar-item {% block preaching-active %} {% endblock preaching-active %}">
+            <div class="icon"><span class="fa fa-music"></span></div>
+            <div class="title"><p>Preachings</p></div>
+            </button>
+        </a>
+        <a href="" class="">
+            <button class="ripple sidebar-item {% block leaders-active %} {% endblock leaders-active %}">
+            <div class="icon"><span class="fa fa-users"></span></div>
+            <div class="title"><p>Leaders</p></div>
+            </button>
+        </a>
+        <a href="" class="">
+            <button class="ripple sidebar-item {% block info-active %} {% endblock info-active %}">
+            <div class="icon"><span class="fa fa-info"></span></div>
+            <div class="title"><p>Info</p></div>
+            </button>
+        </a>
+        <a href="" class="">
+            <button class="ripple sidebar-item {% block sms-active %} {% endblock sms-active %}">
+            <div class="icon"><span class="fa fa-envelope"></span></div>
+            <div class="title"><p>SMS</p></div>
+            </button>
+        </a>
+	  </div>
+	</div>
+
+	<div class="content">
+	  <div class="navbar">
+        <span id="toogleSidebar"><span class="fa fa-bars"></span></span>
+        <div class="navbar-right">
+            <a href="">
+                <div class="notification-btn">
+                    <span class="fa fa-phone icon"></span>
+                    <span class="notification">5</span>
+                </div> 
+            </a> 
+            <a href="">
+                <div class="notification-btn">
+                    <span class="fa fa-paper-plane"></span>
+                    <span class="notification">5</span>
+                </div> 
+            </a>
+        </div>
+      </div>
+      <div class="body">
+        {% block body %}
+
+        {% endblock body %}
+      </div>    
+	</div>
+  </div>
+
+	{% load static %}
+	<script src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/mdb.min.js' %}"></script>
+	<script src="{% static 'js/fontawesome.min.js' %}"></script>
+	<script src="{% static 'js/dashboard_app.js' %}"></script>
+</body>
+</html>
