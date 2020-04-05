@@ -119,7 +119,7 @@
 
 .section {
   padding: 5px;
-  min-height: 200px;
+  height: 200px;
   overflow: auto;
 }
 
