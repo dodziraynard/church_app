@@ -10,9 +10,10 @@ from .models import (   Preaching,
                         PrayerRequest,)
 
 from . forms import DevotionForm, VideoForm
+from account.models import Profile
 
 def index(request):
-    users = Profil.objects.filter(is_active=True, church=request.user.profile.church)
+    users = Profile.objects.filter(user__is_active=True, church=request.user.profile.church)
     preachings  = Preaching.objects.filter(church=request.user.profile.church)
     videos      = Video.objects.filter(church=request.user.profile.church)
     materials      = Material.objects.filter(church=request.user.profile.church)
