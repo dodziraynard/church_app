@@ -7,4 +7,7 @@ class CustomMiddleWares(object):
     def __call__(self, request):
         request.testimony_count = Testimony.objects.filter(viewed=False).count()
         request.request_count = PrayerRequest.objects.filter(viewed=False).count()
+        request.message         = request.session.pop("message", "")
+        request.message_type    = request.session.pop("message_type", "")
+        
         return self.get_response(request)

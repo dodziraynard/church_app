@@ -17,6 +17,7 @@
 .sidebar{
     min-width: 200px;
     overflow-x: hidden;
+    overflow-y: hidden;
     transition: all .4s ease-in-out;
     background-color: rgb(35, 35, 35);
     height: 100vh;
@@ -27,6 +28,12 @@
     .header{
         height: 50px;
         background-color: rgb(240, 244, 248);
+    }
+
+    .sidebar-content{
+        height: 90vh;
+        overflow-y: auto;
+        // padding-bottom: 10px;
     }
 }
 .hide-sidebar{
@@ -47,6 +54,10 @@
     outline: none;
     border: none;
 
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    white-space: nowrap; 
+    
     .icon{
         min-width: 35px;
         font-size: 1.5em;
@@ -59,6 +70,7 @@
     }
 
     .title{
+        padding-left: 5px;
     }
 }
 
@@ -79,7 +91,7 @@
         background-color: white;
         position: sticky;
         top: 0;
-        z-index: 5;
+        z-index: 1;
         overflow: hidden;
 
         .navbar-right{
@@ -99,6 +111,7 @@
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
+    transition: transform .2s ease-in-out;
 }
 
 .header{
@@ -113,9 +126,26 @@
     overflow: auto;
 }
 
+.section2{
+    padding: 5px;
+    height: 70vh;
+    overflow: auto;
+}
+
+.flex{
+    display: flex;
+    margin: 1%;
+}
+
+.btn{
+    border-radius: 5px;
+    font-size: 1em;
+}
+
 .chat-box{
-    background-color: rgb(246, 233, 248);
+    background-color: rgb(221, 234, 247);
     min-height: 50px;
+    margin-top: 5px;
     border-bottom-left-radius:50px;
     border-bottom-right-radius: 20px;
     border-top-right-radius: 20px;
@@ -177,4 +207,49 @@ transition: background 0s;
     position: absolute;
     top: 0px;
     left: 0;
+    border: 1px solid $shadow;
+    box-shadow: 0px 0px 5px $shadow;
+}
+
+*{
+        &::-webkit-scrollbar {
+        width: 7px !important;
+        background-color: white;
+    }
+
+    &::-webkit-scrollbar-thumb{
+        background: $shadow;
+    }
+}
+
+.alert-box{
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .message{
+        text-align: center;
+    }
+
+    .background{
+        background-color: white;
+        padding: 5% 10%;
+        border-radius: 1%;
+    }
+
+    .close{
+        position: absolute;
+        top: 5px;
+        // right: 10px;
+        font-size: 3em;
+    }
 }

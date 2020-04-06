@@ -21,3 +21,29 @@ if (toggleButton){
     toggleButton.addEventListener("click", hideSidebar);
 }
 
+const alertBox = document.querySelector(".alert-box");
+if (alertBox){
+    alertBox.addEventListener("click", ()=>{
+        alertBox.style.display="none";
+    })
+}
+
+const updateRequestViewStatus = (target)=>{
+    const pk = target.dataset.pk
+    target.innerText = "..."
+    const csrfmiddlewaretoken    = document.querySelector("input[name='csrfmiddlewaretoken']").value
+    const url = `/view_request/${pk}`
+    $.post( url, 
+        {
+            csrfmiddlewaretoken
+        }, 
+    function(data){
+        response = data.success
+        if (response===true){
+            target.classList.remove("btn-info")
+            target.classList.add("btn-success")
+            target.innerText = "OK"
+            target.disabled=true;
+        }
+    });
+}

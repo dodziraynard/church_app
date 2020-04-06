@@ -1,0 +1,68 @@
+{% extends "dashboard/base_template.html" %}
+{% block requests-active %}sidebar-item-active{% endblock requests-active %}
+
+{% block body %}
+    <h4> <span class="fa fa-phone"></span> Prayer Request</h4>
+    {% csrf_token %}
+    <div class="center card">
+        <div class="header"><h4>New Prayer Requests</h4></div>
+        <div class="section">
+            {% if not new_requests %} 
+                <h3 class="text text-secondary">No new requests</h3>
+            {% else %}
+                <table class="table table-striped" cellspacing="0" width="100%">
+                    <thead style="position: sticky; top: 40px;">
+                        <tr>
+                            <th class="th-md"><h4>User</h4></th>
+                            <th class="th-md"><h4>Request</h4></th>
+                            <th class="th-md"><h4>Date</h4></th>
+                            <th class="th-md"><h4>Action</h4></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for req in new_requests %}
+                    <tr>
+                        <td><h5>{{req.user.profile.full_name}}</h5></td>
+                        <td><h5>{{req.request}}</h5></td>
+                        <td><h5>{{req.date|date:'D N j, P'}}</h5></td>
+                        <td><button 
+                            data-pk="{{req.pk}}"
+                            onclick="updateRequestViewStatus(this)"
+                            class="btn btn-info"><span class="fa fa-check"></span></button></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+
+    <hr>
+    <div class="center card">
+        <div class="header"><h4>Old Prayer Requests</h4></div>
+        <div class="section">
+            {% if not old_requests %} 
+                <h3 class="text text-secondary">No old requests</h3>
+            {% else %}
+                <table class="table table-striped" cellspacing="0" width="100%">
+                    <thead style="position: sticky; top: 40px;">
+                        <tr>
+                            <th class="th-md"><h4>User</h4></th>
+                            <th class="th-md"><h4>Request</h4></th>
+                            <th class="th-md"><h4>Date</h4></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for req in old_requests %}
+                    <tr>
+                        <td><h5>{{req.user.profile.full_name}}</h5></td>
+                        <td><h5>{{req.request}}</h5></td>
+                        <td><h5>{{req.date|date:'D N j, P'}}</h5></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock body%}

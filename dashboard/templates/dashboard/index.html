@@ -65,20 +65,21 @@
                 <h3 class="text text-secondary">No requests found</h3>
             </div>
             {% endif %}
-            {% for req in prayer_requests %}
-            <div class="row section">
-                <div class="col-md-2 col-sm-2 col-xs-2">
-                    <img class="profile-pic" {% if req.user %} src="{{req.user.profile.image.url}}" 
-                                            {% else %} src="/resources/assets/avatar.png" 
-                                            {% endif %} height="45" width="45" alt="profile">
+            <div class="section">
+                {% for req in prayer_requests %}
+                <div class="row">
+                    <div class="col-md-2 col-sm-2 col-xs-2">
+                        <img class="profile-pic" {% if req.user %} src="{{req.user.profile.image.url}}" 
+                                                {% else %} src="/resources/assets/avatar.png" 
+                                                {% endif %} height="45" width="45" alt="profile">
+                    </div>
+                    <div class="chat-box col-md-10 col-sm-10 col-xs-10">
+                        {{req.request}}
+                        <p>~{{req.user.profile.full_name}}</p>
+                    </div>
                 </div>
-                <div class="chat-box col-md-10 col-sm-10 col-xs-10">
-                    {{req.request}}
-                    <hr>
-                    <p>~{{req.user.profile.full_name}}</p>
-                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
 
@@ -90,21 +91,21 @@
                 <h3 class="text text-secondary">No Testimony found</h3>
             </div>
             {% endif %}
-            {% for testimony in testimonies %}
-            <div class="row section">
-                <div class="col-md-2 col-sm-2 col-xs-2">
-                    <img class="profile-pic" {% if testimony.user %} src="{{testimony.user.profile.image.url}}" 
-                                            {% else %} src="/resources/assets/avatar.png" 
-                                            {% endif %} height="45" width="45" alt="profile">
+            <div class="section">
+                {% for testimony in testimonies %}
+                <div class="row">
+                    <div class="col-md-2 col-sm-2 col-xs-2">
+                        <img class="profile-pic" {% if testimony.user %} src="{{testimony.user.profile.image.url}}" 
+                                                {% else %} src="/resources/assets/avatar.png" 
+                                                {% endif %} height="45" width="45" alt="profile">
+                    </div>
+                    <div class="chat-box col-md-10 col-sm-10 col-xs-10">
+                        {{testimony.testimony}}
+                        <p>~{{testimony.user.profile.full_name}}</p>
+                    </div>
                 </div>
-                <div class="chat-box col-md-10 col-sm-10 col-xs-10">
-                    {{testimony.testimony}}
-
-                    <hr>
-                    <p>~{{testimony.user.profile.full_name}}</p>
-                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
 </div>

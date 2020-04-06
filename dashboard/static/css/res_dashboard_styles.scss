@@ -2,8 +2,14 @@
 
 @media only screen and (max-width: 768px) {
     .hide-sidebar{
-        width: 0;
+        width: 200px !important;
+        min-width: 200px !important;
+    }
+
+    //sidebar
+    .sidebar{
         min-width: 0;
+        width: 0;
     }
 
     .center{
