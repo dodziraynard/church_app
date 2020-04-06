@@ -109,7 +109,8 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-color: white;
+  background-color: #680d6b;
+  color: white;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -212,7 +213,7 @@
   border-radius: 100%;
   padding: 5px;
   cursor: pointer;
-  color: black;
+  color: white;
   -webkit-transition: .2s background ease-in-out;
   transition: .2s background ease-in-out;
 }

@@ -98,7 +98,8 @@
     .navbar{
         padding: 10px;
         display: flex;
-        background-color: white;
+        background-color: rgb(104, 13, 107);
+        color: white;
         position: sticky;
         top: 0;
         z-index: 1;
@@ -190,7 +191,7 @@ transition: background 0s;
     border-radius: 100%;
     padding: 5px;
     cursor: pointer;
-    color: black;
+    color: white;
     transition: .2s background ease-in-out;
 
     &:hover{

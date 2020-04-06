@@ -10,12 +10,12 @@ hideSidebar = ()=>{
     }
 }
 const toggleButton = document.querySelector("#toogleSidebar");
-let sideBarOpened = localStorage.getItem("sideBarOpened");
-if (sideBarOpened === "true"){
-    sideBar.classList.add("hide-sidebar")
-} else{
-    sideBar.classList.remove("hide-sidebar")
-}
+// let sideBarOpened = localStorage.getItem("sideBarOpened");
+// if (sideBarOpened === "true"){
+//     sideBar.classList.add("hide-sidebar")
+// } else{
+//     sideBar.classList.remove("hide-sidebar")
+// }
 
 if (toggleButton){
     toggleButton.addEventListener("click", hideSidebar);

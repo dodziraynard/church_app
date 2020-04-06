@@ -167,7 +167,7 @@
 	<div class="content">
 	  <div class="navbar">
         <span id="toogleSidebar"><span class="fa fa-bars"></span></span>
-        <div class="" style="width: 90%"><h4 class="text text-center">{{request.user.profile.church|upper}}</h4></div>
+        <div class="" style="width: 90%; font-weight: 800"><h4 style="font-weight: 600" class="text text-center">{{request.user.profile.church|upper}}</h4></div>
         <div class="navbar-right">
             <a href="{% url 'dashboard:prayer_request' %}">
                 <div class="notification-btn">
