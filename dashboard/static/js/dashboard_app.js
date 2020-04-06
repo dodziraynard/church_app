@@ -47,3 +47,35 @@ const updateRequestViewStatus = (target)=>{
         }
     });
 }
+
+const updateTestimonyViewStatus = (target)=>{
+    const pk = target.dataset.pk
+    target.innerText = "..."
+    const csrfmiddlewaretoken    = document.querySelector("input[name='csrfmiddlewaretoken']").value
+    const url = `/view_testimony/${pk}`
+    $.post( url, 
+        {
+            csrfmiddlewaretoken
+        }, 
+    function(data){
+        response = data.success
+        if (response===true){
+            target.classList.remove("btn-info")
+            target.classList.add("btn-success")
+            target.innerText = "OK"
+            target.disabled=true;
+        }
+    });
+}
+
+//Make tables clickable
+const rows = document.querySelectorAll("table tr")
+if (rows.length>0){
+    rows.forEach(element => {
+        if (!element.getAttribute('href')) return;
+        element.addEventListener("click", (event)=>{
+            const url = element.getAttribute('href')
+            document.location=url;
+        })
+    });
+}

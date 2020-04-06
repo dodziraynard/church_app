@@ -1,0 +1,17 @@
+{% extends "dashboard/base_template.html" %}
+{% block devotions-active %}sidebar-item-active{% endblock devotions-active %}
+
+{% block body %}
+    <h4> <span class="fa fa-paper-plane"></span> EDIT DEVOTION</h4>
+    <hr>
+    <div class="center">
+        <div class="">
+            <form action="{% url 'dashboard:edit_devotion' devotion.pk %}" method="post" class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.media}}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-secondary"><span class="fa fa-paper-plane"></span> SUBMIT</button>
+            </form>
+        </div>
+    </div>
+{% endblock body %}

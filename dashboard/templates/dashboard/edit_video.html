@@ -1,0 +1,24 @@
+{% extends "dashboard/base_template.html" %}
+{% block video-active %}sidebar-item-active{% endblock video-active %}
+
+{% block body %}
+    <h4> <span class="fa fa-video-camera"></span> VIDEO</h4>
+    <hr>
+    <div class="center">
+        <div class="">
+            <form action="{% url 'dashboard:edit_video' video.pk %}" method="post" class="form">
+                <div class="form-group">
+                    <p>Current Thumbnail:</p>
+                    <img src="{{video.image.url}}" alt="thumbnail" width="50" height="50">
+
+                    <p>Current Video:</p>
+                    <p><strong>{{video.file}}</strong></p>
+                </div>
+                {% csrf_token %}
+                {{form.media}}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-secondary"><span class="fa fa-paper-plane"></span> UPDATE</button>
+            </form>
+        </div>
+    </div>
+{% endblock body%}

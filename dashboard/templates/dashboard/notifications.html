@@ -2,15 +2,21 @@
 {% block notifications-active %}sidebar-item-active{% endblock notifications-active %}
 
 {% block body %}
-    <h4> <span class="fa fa-bell"></span> Notifications</h4>
-
+    <h4> <span class="fa fa-bell"></span> NOTIFICATIONS</h4>
+    <hr>
     <div class="center card">
         <div class="header"><h4>Send New notification</h4></div>
         <form action="{% url 'dashboard:notifications' %}" method="post" class="form">
             {% csrf_token %}
-            <div class="flex m-1">
-                <input required class="form-control" name="title" type="text" placeholder="Title">
-                <textarea required class="form-control" name="message" type="text" placeholder="Message"></textarea>
+            <div class="row">
+                <div class="col-md-6">
+                    <br>
+                    <input required class="form-control" name="title" type="text" placeholder="Title">
+                </div>
+                <br>
+                <div class="col-md-6">
+                    <textarea required class="form-control" name="message" type="text" placeholder="Message"></textarea>
+                </div>
             </div>
             <button type="submit" class="btn btn-secondary"><span class="fa fa-paper-plane"></span> SEND</button>
         </form>

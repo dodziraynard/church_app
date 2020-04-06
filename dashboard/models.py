@@ -5,6 +5,12 @@ from django.urls import reverse
 from django.contrib.sites.models import Site
 from .utils import send_notification
 from ckeditor.fields import RichTextField
+import os
+
+def content_file_name(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = "%s.%s" % (instance.title, ext)
+    return os.path.join('uploads', filename)
 
 class ResourceMixin(models.Model):
     title  = models.CharField(max_length=100)
@@ -12,6 +18,7 @@ class ResourceMixin(models.Model):
     date  = models.DateTimeField(default=timezone.now)
     image  = models.ImageField(upload_to="uploads/images")
     church = models.ForeignKey("Church", on_delete=models.CASCADE) 
+    file  = models.FileField(upload_to=content_file_name)
 
     class Meta:
         abstract = True
@@ -36,38 +43,32 @@ class ResourceMixin(models.Model):
         return f"{domain}{path}"
 
 class Photo(ResourceMixin):
-    file  = models.FileField(upload_to="uploads/photos")
-
+    def save(self, *args, **kwargs):
+        super(Preaching, self).save(*args, **kwargs)
+        send_notification("New Photo", 
+                f"New Photo has been added, open 'Photos' to listen; 'Title: {self.title}'")
+                
 class Preaching(ResourceMixin):
     preacher = models.CharField(max_length=100)
-    file   = models.FileField(upload_to="uploads/preachings")
 
     def save(self, *args, **kwargs):
-        self.file.name = self.title+"."+self.file.name.split(".")[-1]
         super(Preaching, self).save(*args, **kwargs)
         send_notification("New Preaching", 
                 f"New preaching has been added, open 'Preachings' to listen; 'Title: {self.title}'")
 
 class Video(ResourceMixin):
-    file  = models.FileField(upload_to="uploads/videos")
-
     def save(self, *args, **kwargs):
-        self.file.name = self.title+"."+self.file.name.split(".")[-1]
         super(Video, self).save(*args, **kwargs)
         send_notification("New Video", 
                 f"New video has been added, open 'Videos' to listen; 'Title: {self.title}'")
 
 class Material(ResourceMixin):
-    file  = models.FileField(upload_to="uploads/materials")
-
     def save(self, *args, **kwargs):
-        self.file.name = self.title+"."+self.file.name.split(".")[-1]
         super(Material, self).save(*args, **kwargs)
         send_notification("New Material", 
                 f"New book has been added, open 'Library' to view; 'Title: {self.title}'")
 
     def update(self, *args, **kwargs):
-        self.file.name = self.title+"."+self.file.name.split(".")[-1]
         super(Material, self).update(*args, **kwargs)
     
 class Leader(models.Model):
@@ -107,9 +108,10 @@ class Church(models.Model):
         return self.name
 
 class DailyDevotion(models.Model):
-    image       = models.ImageField(upload_to="uploads/Devotions")
+    title       = models.CharField(max_length=100)
     content     = RichTextField()
-    verse       = models.CharField(max_length=100)
+    date        = models.DateTimeField(default=timezone.now)
+    background  = models.ImageField(null=True, blank=True)
     church      = models.ForeignKey("Church", on_delete=models.CASCADE) 
 
     def save(self, *args, **kwargs):

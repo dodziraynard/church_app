@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{devotion.title}}</title>
+
+	{% load static %}
+    <link rel="stylesheet" href="{% static 'css/dashboard_styles.css' %}">
+</head>
+<body 
+    {% if devotion.background %}
+
+        style="background: no-repeat url('{{ devotion.background.url }}'); background-size: cover;" 
+    
+    {% endif %}>
+
+    <div class="center">
+        <p style="text-align: center;">{{devotion.content | safe}}</p>
+    </div>
+</body>
+</html>
