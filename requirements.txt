@@ -9,3 +9,4 @@ django-rest-knox==4.1.0
 python-social-auth==0.3.6
 pusher_push_notifications==2.0.0
 django-ckeditor==5.9.0
+install django-crispy-forms
