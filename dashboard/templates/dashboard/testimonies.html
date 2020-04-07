@@ -58,12 +58,15 @@
                     <tr>
                         <td><h5>{{testimony.user.profile.full_name}}</h5></td>
                         <td><h5>{{testimony.testimony}}</h5></td>
-                        <td><h5>{{testimony.date|date:'D N j, P'}}</h5></td>
+                        <td><h5>{{testimony.date|date:'D N j'}}</h5></td>
                     </tr>
                     {% endfor %}
                     </tbody>
                 </table>
             {% endif %}
+        </div>
+        <div class="form-group">
+            <p class="text text-right m-1"><a href="{% url 'dashboard:testimony_list' %}">Read</a></p>
         </div>
     </div>
 {% endblock body%}

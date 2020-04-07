@@ -47,7 +47,7 @@
 }
 
 .f2 {
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 .h-scroll {
@@ -109,7 +109,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-color: #680d6b;
+  background-color: #410d6b;
   color: white;
   position: -webkit-sticky;
   position: sticky;
@@ -124,6 +124,8 @@
   display: flex;
   position: absolute;
   right: 10px;
+  background-color: rgba(0, 0, 0, 0.37);
+  border-radius: 10px;
 }
 
 .content .body {
@@ -149,7 +151,7 @@
 
 .section {
   padding: 5px;
-  height: 200px;
+  height: 300px;
   overflow: auto;
 }
 

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#680d6b" />
+    <meta name="theme-color" content="#410d6b" />
 	<title>{% block title %} Dashboard {% endblock title %}</title>
 
 	{% load static %}
@@ -132,31 +132,31 @@
             <div class="title"><p>Video</p></div>
             </button>
         </a>
-        <a href="" class="">
+        <a href="{% url 'dashboard:library' %}" class="">
             <button class="ripple sidebar-item {% block library-active %} {% endblock library-active %}">
             <div class="icon"><span class="fa fa-book"></span></div>
             <div class="title"><p>Library</p></div>
             </button>
         </a>
-        <a href="" class="">
-            <button class="ripple sidebar-item {% block preaching-active %} {% endblock preaching-active %}">
+        <a href="{% url 'dashboard:audio' %}" class="">
+            <button class="ripple sidebar-item {% block audio-active %} {% endblock audio-active %}">
             <div class="icon"><span class="fa fa-music"></span></div>
-            <div class="title"><p>Preachings</p></div>
+            <div class="title"><p>Audio</p></div>
             </button>
         </a>
-        <a href="" class="">
+        <a href="{% url 'dashboard:leader' %}" class="">
             <button class="ripple sidebar-item {% block leaders-active %} {% endblock leaders-active %}">
             <div class="icon"><span class="fa fa-users"></span></div>
             <div class="title"><p>Leaders</p></div>
             </button>
         </a>
-        <a href="" class="">
+        <a href="{% url 'dashboard:church_info' %}" class="">
             <button class="ripple sidebar-item {% block info-active %} {% endblock info-active %}">
             <div class="icon"><span class="fa fa-info"></span></div>
             <div class="title"><p>Info</p></div>
             </button>
         </a>
-        <a href="" class="">
+        <a href="{% url 'dashboard:sms' %}" class="">
             <button class="ripple sidebar-item {% block sms-active %} {% endblock sms-active %}">
             <div class="icon"><span class="fa fa-envelope"></span></div>
             <div class="title"><p>SMS</p></div>
@@ -168,7 +168,7 @@
 	<div class="content">
 	  <div class="navbar">
         <span id="toogleSidebar"><span class="fa fa-bars"></span></span>
-        <div class="" style="width: 90%; font-weight: 800"><h4 style="font-weight: 600" class="text text-center">{{request.user.profile.church|upper}}</h4></div>
+        <div class="" style="width: 80%;"><h4 style="font-weight: 500; margin-left: 10px;" class="text">{{request.user.profile.church|upper}}</h4></div>
         <div class="navbar-right">
             <a href="{% url 'dashboard:prayer_request' %}">
                 <div class="notification-btn">
@@ -191,7 +191,7 @@
 
         <hr>
         <div class="footer">
-            Dashboard V 1.0
+            Dashboard v1.0
         </div>
       </div>    
 	</div>

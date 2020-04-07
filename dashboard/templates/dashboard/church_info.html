@@ -1,0 +1,82 @@
+{% extends "dashboard/base_template.html" %}
+{% block info-active %}sidebar-item-active{% endblock info-active %}
+
+{% block body %}
+    <h4> <span class="fa fa-info"></span> INFO</h4>
+    <hr>
+    <div class="center">
+        <div class="card">
+            <div class="header"><p>CHURCH INFORMATION</p></div>
+            <div class="section">
+                <div class="form-group">
+                  <h5><strong>NAME</strong></h5>
+                  <pre>{{church.name}}</pre>
+                </div>
+
+                <div class="form-group">
+                  <h5><strong>HEAD PASTOR</strong></h5>
+                  <pre>{{church.head_pastor}}</pre>
+                </div>
+
+                <div class="form-group">
+                  <h5><strong>ABOUT CHURCH</strong></h5>
+                  <pre>{{church.about}}</pre>
+                </div>
+
+                <div class="form-group">
+                  <h5><strong>ADDRESS</strong></h5>
+                  <pre>{{church.address}}</pre>
+                </div>
+
+                <div class="form-group">
+                  <h5><strong>HELP INFORMATION</strong></h5>
+                  <pre>{{church.help_text}}</pre>
+                </div>
+
+                <div class="form-group">
+                  <h5><strong>CHURCH ID</strong></h5>
+                  <pre>{{church.church_id}}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#centralModalSm">
+   <span class="fa fa-pencil"></span> UPDATE INFO
+  </button>
+  
+  <!-- Central Modal Small -->
+  <div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+  
+    <!-- Change class .modal-sm to change the size of the modal -->
+    <div class="modal-dialog modal-lg" role="document">  
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title w-100" id="myModalLabel"><span class="fa fa-plus"></span> UPDATE INFO</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="{% url 'dashboard:church_info' %}" method="post" class="form" enctype="multipart/form-data">
+               {% csrf_token %}
+                {% load crispy_forms_tags %}
+                 {% for field in form %}
+                <div class="form-group">
+                    <div class="col-sm-10 col-md-offset-1">{{ field|as_crispy_field }}</div>
+                    <span class="text-danger small">{{ field.errors }}</span>    
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-secondary"><span class="fa fa-paper-plane"></span> SUBMIT</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Central Modal Small -->
+{% endblock body%}

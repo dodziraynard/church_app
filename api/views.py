@@ -12,7 +12,7 @@ from dashboard.models import (
         Church,
         DailyDevotion,
         Notification,
-        Preaching,
+        Audio,
         Video,
         Material,
         Photo,
@@ -26,7 +26,7 @@ from . serializers import (
         NotificationSerializer,
         VideoSerializer,
         MaterialSerializer,
-        PreachingSerializer,
+        AudioSerializer,
         PhotoSerializer,
         TestimonySerializer,
         PrayerRequestSerializer,
@@ -98,12 +98,12 @@ class MaterialsAPI(APIView):
         data = self.serializer_class(materials, many=True).data
         return Response({"materials": data})
 
-class PreachingsAPI(APIView):
-    serializer_class    = PreachingSerializer
+class AudiosAPI(APIView):
+    serializer_class    = AudioSerializer
 
     def get(self, request):
         query = request.GET.get("query")
-        preachings = Preaching.objects.filter(church=request.user.profile.church).order_by("-id")
+        preachings = Audio.objects.filter(church=request.user.profile.church).order_by("-id")
         if query:
             preachings = preachings.filter(
                 Q(title__icontains=query) |

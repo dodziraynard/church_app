@@ -1,0 +1,22 @@
+{% extends "dashboard/base_template.html" %}
+{% block leaders-active %}sidebar-item-active{% endblock leaders-active %}
+
+{% block body %}
+    <h4> <span class="fa fa-users"></span> EDIT LEADER</h4>
+    <hr>
+    <div class="center">
+        <div class="">
+            <form action="{% url 'dashboard:edit_leader' leader.pk %}" method="post" class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% load crispy_forms_tags %}
+                 {% for field in form %}
+                <div class="form-group">
+                    <div class="col-sm-10 col-md-offset-1">{{ field|as_crispy_field }}</div>
+                    <span class="text-danger small">{{ field.errors }}</span>    
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-secondary"><span class="fa fa-paper-plane"></span> UPDATE</button>
+            </form>
+        </div>
+    </div>
+{% endblock body%}

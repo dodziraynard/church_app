@@ -1,0 +1,79 @@
+{% extends "dashboard/base_template.html" %}
+{% block leaders-active %}sidebar-item-active{% endblock leaders-active %}
+
+{% block body %}
+    <h4> <span class="fa fa-music"></span> LEADERS</h4>
+    <hr>
+    <div class="center">
+        <div class="card">
+            <div class="header"><p>CURRENT LEADERS</p></div>
+            <div class="section">
+                {% if not leaders %} 
+                    <h3 class="text text-secondary">No items</h3>
+                {% else %}
+                <h5>{{leaders.count}} items found</h5>
+                    <table class="table table-striped table-hover h-scroll" cellspacing="0">
+                        <thead style="position: sticky; top: 40px;">
+                            <tr>
+                                <th class="th-md"><h4>POSITION</h4></th>
+                                <th class="th-md"><h4>NAME</h4></th>
+                                <th class="th-md"><h4>DATE</h4></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for leader in leaders %}
+                        <tr>
+                            <td> <img src="{{ leader.user.profile.image.url }}" height="50" width="50" alt="">
+                                <span class="f2">{{leader.position}}</span></td>
+                            <td><p class="f2">{{leader.user.profile.full_name}}</p></td>
+                            <td><p class="f2">{{leader.date|date:'D N j'}}</p>
+                                <a href="{% url 'dashboard:edit_leader' leader.pk %}"> <span class="fa fa-pencil"></span> Edit</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#centralModalSm">
+   <span class="fa fa-plus"></span> New Leader
+  </button>
+  
+  <!-- Central Modal Small -->
+  <div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+  
+    <!-- Change class .modal-sm to change the size of the modal -->
+    <div class="modal-dialog modal-lg" role="document">  
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title w-100" id="myModalLabel"><span class="fa fa-plus"></span> New Leader</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="{% url 'dashboard:leader' %}" method="post" class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% load crispy_forms_tags %}
+                 {% for field in form %}
+                <div class="form-group">
+                    <div class="col-sm-10 col-md-offset-1">{{ field|as_crispy_field }}</div>
+                    <span class="text-danger small">{{ field.errors }}</span>    
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-secondary"><span class="fa fa-paper-plane"></span> SUBMIT</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Central Modal Small -->
+{% endblock body%}

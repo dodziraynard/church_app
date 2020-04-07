@@ -1,18 +1,18 @@
 {% extends "dashboard/base_template.html" %}
-{% block video-active %}sidebar-item-active{% endblock video-active %}
+{% block material-active %}sidebar-item-active{% endblock material-active %}
 
 {% block body %}
-    <h4> <span class="fa fa-video-camera"></span> VIDEO</h4>
+    <h4> <span class="fa fa-book"></span> LIBARY</h4>
     <hr>
     <div class="center">
         <div class="">
-            <form action="{% url 'dashboard:edit_video' video.pk %}" method="post" class="form" enctype="multipart/form-data">
+            <form action="{% url 'dashboard:edit_material' material.pk %}" method="post" class="form" enctype="multipart/form-data">
                 <div class="form-group">
                     <p>Current Thumbnail:</p>
-                    <img src="{{video.image.url}}" alt="thumbnail" width="50" height="50">
+                    <img src="{{material.image.url}}" alt="thumbnail" width="50" height="50">
 
-                    <p>Current Video:</p>
-                    <p><strong>{{video.file}}</strong></p>
+                    <p>Current FILE:</p>
+                    <p><strong>{{material.file}}</strong></p>
                 </div>
                 {% csrf_token %}
                 {{form.media}}

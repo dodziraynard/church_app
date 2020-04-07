@@ -5,7 +5,7 @@ from dashboard.models import (
             Church,
             DailyDevotion,
             Notification,
-            Preaching,
+            Audio,
             Video,
             Material,
             Photo,
@@ -60,13 +60,13 @@ class MaterialSerializer(serializers.ModelSerializer):
         model = Material
         fields = "__all__"
     
-class PreachingSerializer(serializers.ModelSerializer):
+class AudioSerializer(serializers.ModelSerializer):
     file = serializers.URLField(source="get_file_url", read_only=True)
     image = serializers.URLField(source="get_image_url", read_only=True)
     date = serializers.CharField(source="get_readable_date", read_only=True)
     
     class Meta:
-        model = Preaching
+        model = Audio
         fields = "__all__"
 
 class PhotoSerializer(serializers.ModelSerializer):

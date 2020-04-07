@@ -26,12 +26,15 @@ INSTALLED_APPS = [
     'knox',
     'rest_framework',
     'ckeditor',
+    'crispy_forms',
 
     # Custom Apps
     'dashboard',
     'account',
     'api'
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (

@@ -1,20 +1,22 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.http import JsonResponse 
-from .models import (   Preaching,
+from .models import (   Audio,
                         Video,
                         Material,
                         DailyDevotion,
                         Testimony,
+                        Leader,
+                        Material,
                         Notification,
-                        PrayerRequest,)
+                        PrayerRequest)
 
-from . forms import DevotionForm, VideoForm
+from . forms import DevotionForm, VideoForm, MaterialForm, AudioForm, LeaderForm, ChurchForm
 from account.models import Profile
 
 def index(request):
     users = Profile.objects.filter(user__is_active=True, church=request.user.profile.church)
-    preachings  = Preaching.objects.filter(church=request.user.profile.church)
+    preachings  = Audio.objects.filter(church=request.user.profile.church)
     videos      = Video.objects.filter(church=request.user.profile.church)
     materials      = Material.objects.filter(church=request.user.profile.church)
     testimonies = Testimony.objects.filter(user__profile__church=request.user.profile.church).order_by("-id")[:5]
@@ -176,4 +178,159 @@ def edit_video(request, pk):
         "video":video,
     }
     template = "dashboard/edit_video.html"
+    return render(request, template, context)
+
+def library(request):
+    form_class = MaterialForm
+    template = "dashboard/library.html"
+    form = form_class()
+    if request.method == "POST":
+        form = form_class(request.POST, request.FILES)
+        if form.is_valid():
+            material = form.save(commit=False)
+            material.church = request.user.profile.church
+            material.save()
+            request.session["message_type"] = "success"
+            request.session["message"] = "Material Added"
+            return redirect("dashboard:library")
+    context = {
+        "form":form, 
+        "materials":Material.objects.filter(church=request.user.profile.church).order_by("-id")
+    }
+    return render(request, template, context)
+
+def edit_material(request, pk):
+    form_class = MaterialForm
+    material = get_object_or_404(Material, pk=pk)
+    if request.method == "GET":
+        form = form_class(instance = material)
+
+    elif request.method == "POST":
+        form = form_class(request.POST, request.FILES, instance = material)
+        if form.is_valid():            
+            form.save()
+            request.session["message_type"] = "success"
+            request.session["message"] = "Book Updated"
+            return redirect("dashboard:library")
+    
+    context = {
+        "form":form,
+        "material":material,
+    }
+    template = "dashboard/edit_library.html"
+    return render(request, template, context)
+
+def audio(request):
+    form_class = AudioForm
+    template = "dashboard/audio.html"
+    form = form_class()
+    if request.method == "POST":
+        form = form_class(request.POST, request.FILES)
+        if form.is_valid():
+            audio = form.save(commit=False)
+            audio.church = request.user.profile.church
+            audio.save()
+            request.session["message_type"] = "success"
+            request.session["message"] = "Material Added"
+            return redirect("dashboard:audio")
+
+    context = {
+        "form":form, 
+        "audios":Audio.objects.filter(church=request.user.profile.church).order_by("-id")
+    }
+    return render(request, template, context)
+
+def edit_audio(request, pk):
+    form_class = AudioForm
+    audio = get_object_or_404(Audio, pk=pk)
+    if request.method == "GET":
+        form = form_class(instance = audio)
+
+    elif request.method == "POST":
+        form = form_class(request.POST, request.FILES, instance = audio)
+        if form.is_valid():            
+            form.save()
+            request.session["message_type"] = "success"
+            request.session["message"] = "Audio Updated"
+            return redirect("dashboard:audio")
+    
+    context = {
+        "form":form,
+        "audio":audio,
+    }
+    template = "dashboard/edit_audio.html"
+    return render(request, template, context)
+
+def leader(request):
+    form_class = LeaderForm
+    template = "dashboard/leader.html"
+    form = form_class()
+    if request.method == "POST":
+        form = form_class(request.POST)
+        if form.is_valid():
+            leader = form.save(commit=False)
+            leader.church = request.user.profile.church
+            leader.save()
+            request.session["message_type"] = "success"
+            request.session["message"] = "Leader Added"
+            return redirect("dashboard:leader")
+
+    context = {
+        "form":form, 
+        "leaders":Leader.objects.filter(church=request.user.profile.church).order_by("-id")
+    }
+    return render(request, template, context)
+
+def edit_leader(request, pk):
+    form_class = LeaderForm
+    leader = get_object_or_404(Leader, pk=pk)
+    if request.method == "GET":
+        form = form_class(instance = leader)
+
+    elif request.method == "POST":
+        form = form_class(request.POST, instance = leader)
+        if form.is_valid():            
+            form.save()
+            request.session["message_type"] = "success"
+            request.session["message"] = "Leader Updated"
+            return redirect("dashboard:leader")
+    
+    context = {
+        "form":form,
+        "leader":leader,
+    }
+    template = "dashboard/edit_leader.html"
+    return render(request, template, context)
+
+def church_info(request):
+    form_class = ChurchForm
+    church = request.user.profile.church
+    if request.method == "GET":
+        form = form_class(instance = church)
+
+    elif request.method == "POST":
+        form = form_class(request.POST, instance = church)
+        if form.is_valid():            
+            form.save()
+            request.session["message_type"] = "success"
+            request.session["message"] = "Church Info Updated"
+            return redirect("dashboard:church_info")
+    
+    context = {
+        "form":form,
+        "church":church,
+    }
+    template = "dashboard/church_info.html"
+    return render(request, template, context)
+
+def sms(request):
+    template = "dashboard/sms.html"
+    return render(request, template)
+
+def testimony_list(request):
+    template = "dashboard/testimony_list.html"
+
+    context = {
+        "testimonies":Testimony.objects.filter(user__profile__church=request.user.profile.church).order_by("-id")
+    }
     return render(request, template, context)

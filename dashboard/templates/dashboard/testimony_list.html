@@ -1,0 +1,25 @@
+{% extends "dashboard/base_template.html" %}
+{% block testimonies-active %}sidebar-item-active{% endblock testimonies-active %}
+
+{% block body %}
+    <h4> <span class="fa fa-paper-plane"></span> TESTIMONIES</h4>
+    <hr>
+    <div class="center card">
+        <div class="header"><h4>Testimonies</h4></div>
+        <div class="section">
+            {% if not testimonies %} 
+                <h3 class="text text-secondary">No testimonies</h3>
+            {% else %}
+                {% for testimony in testimonies %}
+                    <div class="center card m-1">
+                        <div class="m-1">
+                            <h5><strong>{{testimony.user.profile.full_name}}</strong></h5>
+                            <p>{{testimony.testimony}}</p>
+                            <small>{{testimony.date|date:'D N j'}}</small>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock body%}

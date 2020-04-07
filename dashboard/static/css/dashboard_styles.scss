@@ -46,7 +46,7 @@
 }
 
 .f2{
-    font-size: 2em;
+    font-size: 1.5em;
 }
 .h-scroll{
     overflow-x: auto;
@@ -98,7 +98,7 @@
     .navbar{
         padding: 10px;
         display: flex;
-        background-color: #680d6b;
+        background-color: #410d6b;
         color: white;
         position: sticky;
         top: 0;
@@ -109,6 +109,8 @@
             display: flex;
             position: absolute;
             right: 10px;
+            background-color: rgba(0, 0, 0, 0.37);
+            border-radius: 10px;
         }
     }
 
@@ -133,7 +135,7 @@
 
 .section{
     padding: 5px;
-    height: 200px;
+    height: 300px;
     overflow: auto;
 }
 

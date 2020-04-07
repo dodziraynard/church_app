@@ -44,17 +44,15 @@ class ResourceMixin(models.Model):
 
 class Photo(ResourceMixin):
     def save(self, *args, **kwargs):
-        super(Preaching, self).save(*args, **kwargs)
+        super(Photo, self).save(*args, **kwargs)
         send_notification("New Photo", 
                 f"New Photo has been added, open 'Photos' to listen; 'Title: {self.title}'")
                 
-class Preaching(ResourceMixin):
-    preacher = models.CharField(max_length=100)
-
+class Audio(ResourceMixin):
     def save(self, *args, **kwargs):
-        super(Preaching, self).save(*args, **kwargs)
-        send_notification("New Preaching", 
-                f"New preaching has been added, open 'Preachings' to listen; 'Title: {self.title}'")
+        super(Audio, self).save(*args, **kwargs)
+        send_notification("New Audio", 
+                f"New audio has been added, open 'Audios' to listen; 'Title: {self.title}'")
 
 class Video(ResourceMixin):
     def save(self, *args, **kwargs):

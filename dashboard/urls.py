@@ -17,4 +17,17 @@ urlpatterns = [
 
     path("video", views.video, name="video"),
     path("edit_video/<int:pk>", views.edit_video, name="edit_video"),
+
+    path("library", views.library, name="library"),
+    path("edit_material/<int:pk>", views.edit_material, name="edit_material"),
+
+    path("audio", views.audio, name="audio"),
+    path("edit_audio/<int:pk>", views.edit_audio, name="edit_audio"),
+    
+    path("leader", views.leader, name="leader"),
+    path("edit_leader/<int:pk>", views.edit_leader, name="edit_leader"),
+
+    path("church_info", views.church_info, name="church_info"),
+    path("sms", views.sms, name="sms"),
+    path("testimony_list", views.testimony_list, name="testimony_list"),
 ]
