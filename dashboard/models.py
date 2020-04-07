@@ -107,7 +107,7 @@ class Church(models.Model):
 
 class DailyDevotion(models.Model):
     title       = models.CharField(max_length=100)
-    content     = RichTextField()
+    content     = RichTextField(null=True, blank=True)
     date        = models.DateTimeField(default=timezone.now)
     background  = models.ImageField(null=True, blank=True)
     church      = models.ForeignKey("Church", on_delete=models.CASCADE) 

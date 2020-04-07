@@ -6,7 +6,7 @@
     <hr>
     <div class="center">
         <div class="">
-            <form action="" method="post" class="form">
+            <form action="" method="post" class="form" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form.media}}
                 {{form.as_p}}
