@@ -7,16 +7,20 @@
 
 	{% load static %}
     <link rel="stylesheet" href="{% static 'css/dashboard_styles.css' %}">
+
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
-<body 
-    {% if devotion.background %}
-
-        style="background: no-repeat url('{{ devotion.background.url }}'); background-size: cover;" 
-    
-    {% endif %}>
-
-    <div class="center">
-        <p style="text-align: center;">{{devotion.content | safe}}</p>
+<body>
+    <div>
+        {% if devotion.background %}
+        <img src="{{ devotion.background.url }}" alt="devotion" style="width:100%;">
+        {% endif %}
+        <p style="text-align: center; position: absolute; top: 5px;">{{devotion.content | safe}} sime res</p>
     </div>
 </body>
 </html>
