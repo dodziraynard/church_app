@@ -17,7 +17,7 @@ urlpatterns = [
     path("devotion", views.DevotionsAPI.as_view(),  name="devotions"),
     path("notifications", views.NotificationsAPI.as_view()),
     path("materials", views.MaterialsAPI.as_view()),
-    path("audio", views.AudiosAPI.as_view(), name="audio"),
+    path("audios", views.AudiosAPI.as_view(), name="audios"),
     path("photos", views.PhotosAPI.as_view()),
     path("profile", views.UserProfileAPI.as_view()),
 

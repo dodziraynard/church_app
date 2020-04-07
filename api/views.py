@@ -103,14 +103,14 @@ class AudiosAPI(APIView):
 
     def get(self, request):
         query = request.GET.get("query")
-        preachings = Audio.objects.filter(church=request.user.profile.church).order_by("-id")
+        audios = Audio.objects.filter(church=request.user.profile.church).order_by("-id")
         if query:
-            preachings = preachings.filter(
+            audios = audios.filter(
                 Q(title__icontains=query) |
                 Q(desc__icontains=query)
             )
-        data = self.serializer_class(preachings, many=True).data
-        return Response({"preachings": data})
+        data = self.serializer_class(audios, many=True).data
+        return Response({"audios": data})
 
 class DevotionsAPI(APIView):
     serializer_class    = DailyDevotionSerializer
