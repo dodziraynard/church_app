@@ -109,7 +109,7 @@ class DailyDevotion(models.Model):
     title       = models.CharField(max_length=100)
     content     = RichTextField(null=True, blank=True)
     date        = models.DateTimeField(default=timezone.now)
-    background  = models.ImageField(null=True, blank=True)
+    background  = models.ImageField(upload_to="uploads/images", null=True, blank=True)
     church      = models.ForeignKey("Church", on_delete=models.CASCADE) 
 
     def save(self, *args, **kwargs):
