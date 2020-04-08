@@ -33,4 +33,4 @@ class UserLogin(View):
 def logout_user(request):
     logout(request)
     # Redirect to a success page.
-    return redirect('home:index')
+    return redirect('account:login')
