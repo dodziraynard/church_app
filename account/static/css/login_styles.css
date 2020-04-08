@@ -1,0 +1,58 @@
+body {
+  background-color: #cfcfcf;
+}
+
+.page {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100vh;
+}
+
+.card {
+  -webkit-box-shadow: 0px 0px 5px gray;
+          box-shadow: 0px 0px 5px gray;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.center {
+  margin: auto;
+  width: 25%;
+}
+
+.submit {
+  background-color: purple;
+  padding: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 100px;
+  color: white;
+}
+
+input {
+  background: none;
+  outline: none;
+  border: none;
+  border-bottom: 3px solid purple;
+  width: 100%;
+  padding: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .center {
+    margin: auto;
+    width: 90%;
+  }
+}
+/*# sourceMappingURL=login_styles.css.map */

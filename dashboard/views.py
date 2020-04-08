@@ -13,7 +13,9 @@ from .models import (   Audio,
 
 from . forms import DevotionForm, VideoForm, MaterialForm, AudioForm, LeaderForm, ChurchForm
 from account.models import Profile
+from account.decorators import admins_only
 
+@admins_only
 def index(request):
     users = Profile.objects.filter(user__is_active=True, church=request.user.profile.church)
     preachings  = Audio.objects.filter(church=request.user.profile.church)
@@ -40,6 +42,7 @@ def index(request):
     }
     return render(request, template, context)
 
+@admins_only
 def notifications(request):
     if request.method == "POST":
         title = request.POST.get("title")
@@ -55,6 +58,7 @@ def notifications(request):
     template = "dashboard/notifications.html"
     return render(request, template, context)
 
+@admins_only
 def prayer_request(request):
     new_requests = PrayerRequest.objects.filter(viewed=False, user__profile__church=request.user.profile.church)
     old_requests = PrayerRequest.objects.filter(viewed=True, user__profile__church=request.user.profile.church)
@@ -66,10 +70,12 @@ def prayer_request(request):
     template = "dashboard/prayer_request.html"
     return render(request, template, context)
 
+@admins_only
 def view_request(request, pk):
     PrayerRequest.objects.filter(pk=pk).update(viewed=True)
     return JsonResponse({"success":True})
 
+@admins_only
 def testimonies(request):
     new_testimonies = Testimony.objects.filter(viewed=False, user__profile__church=request.user.profile.church)
     old_testimonies = Testimony.objects.filter(viewed=True, user__profile__church=request.user.profile.church)
@@ -81,10 +87,12 @@ def testimonies(request):
     template = "dashboard/testimonies.html"
     return render(request, template, context)
 
+@admins_only
 def view_testimony(request, pk):
     Testimony.objects.filter(pk=pk).update(viewed=True)
     return JsonResponse({"success":True})
 
+@admins_only
 def devotion(request):
     form_class = DevotionForm
     form = form_class()
@@ -105,6 +113,7 @@ def devotion(request):
     }
     return render(request, template, context)
 
+@admins_only
 def edit_devotion(request, pk):
     form_class = DevotionForm
     devotion = get_object_or_404(DailyDevotion, pk=pk)
@@ -142,6 +151,7 @@ def daily_devotion(request):
     }   
     return render(request, template, context)
 
+@admins_only
 def video(request):
     form_class = VideoForm
     template = "dashboard/video.html"
@@ -162,6 +172,7 @@ def video(request):
     }
     return render(request, template, context)
 
+@admins_only
 def edit_video(request, pk):
     form_class = VideoForm
     video = get_object_or_404(Video, pk=pk)
@@ -183,6 +194,7 @@ def edit_video(request, pk):
     template = "dashboard/edit_video.html"
     return render(request, template, context)
 
+@admins_only
 def library(request):
     form_class = MaterialForm
     template = "dashboard/library.html"
@@ -202,6 +214,7 @@ def library(request):
     }
     return render(request, template, context)
 
+@admins_only
 def edit_material(request, pk):
     form_class = MaterialForm
     material = get_object_or_404(Material, pk=pk)
@@ -223,6 +236,7 @@ def edit_material(request, pk):
     template = "dashboard/edit_library.html"
     return render(request, template, context)
 
+@admins_only
 def audio(request):
     form_class = AudioForm
     template = "dashboard/audio.html"
@@ -243,6 +257,7 @@ def audio(request):
     }
     return render(request, template, context)
 
+@admins_only
 def edit_audio(request, pk):
     form_class = AudioForm
     audio = get_object_or_404(Audio, pk=pk)
@@ -264,6 +279,7 @@ def edit_audio(request, pk):
     template = "dashboard/edit_audio.html"
     return render(request, template, context)
 
+@admins_only
 def leader(request):
     form_class = LeaderForm
     template = "dashboard/leader.html"
@@ -284,6 +300,7 @@ def leader(request):
     }
     return render(request, template, context)
 
+@admins_only
 def edit_leader(request, pk):
     form_class = LeaderForm
     leader = get_object_or_404(Leader, pk=pk)
@@ -305,6 +322,7 @@ def edit_leader(request, pk):
     template = "dashboard/edit_leader.html"
     return render(request, template, context)
 
+@admins_only
 def church_info(request):
     form_class = ChurchForm
     church = request.user.profile.church
@@ -326,10 +344,12 @@ def church_info(request):
     template = "dashboard/church_info.html"
     return render(request, template, context)
 
+@admins_only
 def sms(request):
     template = "dashboard/sms.html"
     return render(request, template)
 
+@admins_only
 def testimony_list(request):
     template = "dashboard/testimony_list.html"
 
