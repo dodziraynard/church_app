@@ -128,10 +128,13 @@ def edit_devotion(request, pk):
 
 def daily_devotion(request):
     pk = request.GET.get("pk")
+    church = request.GET.get("church")
     if pk:
         devotion = get_object_or_404(DailyDevotion, pk=pk)
+    elif church:
+        devotion = DailyDevotion.objects.filter(church_id=church).last()
     else:
-        devotion = DailyDevotion.objects.filter(church=request.user.profile.church).last()
+        devotion = DailyDevotion.objects.last()
 
     template = "dashboard/devotion_preview.html"
     context = {
