@@ -25,7 +25,7 @@ class UserLogin(View):
             login(request, user)
             return redirect("dashboard:index")
         context = {
-            "form":form_class(),
+            "form":self.form_class(),
             'message': 'Wrong password or username, please check and try and again.',
         }
         return render(request, self.template_name, context)

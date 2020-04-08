@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.http import JsonResponse 
+from django.views.decorators.clickjacking import xframe_options_exempt
 from .models import (   Audio,
                         Video,
                         Material,
@@ -135,6 +136,7 @@ def edit_devotion(request, pk):
     template = "dashboard/edit_devotion.html"
     return render(request, template, context)
 
+@xframe_options_exempt
 def daily_devotion(request):
     pk = request.GET.get("pk")
     church = request.GET.get("church")
