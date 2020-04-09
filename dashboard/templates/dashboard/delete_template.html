@@ -1,0 +1,12 @@
+{% extends "dashboard/base_template.html" %}
+{% block body %}
+    <div class="center">
+        <div class="">
+            <form action="" method="post" class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p class="text text-danger">This action will permanently delete <strong>'{{object.file}}'</strong> from our servers</p>
+                <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span> DELETE</button>
+            </form>
+        </div>
+    </div>
+{% endblock body%}
