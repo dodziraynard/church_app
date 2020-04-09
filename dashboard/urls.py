@@ -34,4 +34,5 @@ urlpatterns = [
     path("delete_video/<int:pk>", views.delete_video, name="delete_video"),
     path("delete_audio/<int:pk>", views.delete_audio, name="delete_audio"),
     path("delete_material/<int:pk>", views.delete_material, name="delete_material"),
+    path("delete_leader/<int:pk>", views.delete_leader, name="delete_leader"),
 ]

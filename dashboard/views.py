@@ -404,3 +404,18 @@ def delete_material(request, pk):
         "object":material
     }
     return render(request, template, context)
+
+@admins_only
+def delete_leader(request, pk):
+    template = "dashboard/delete_template.html"
+    leader = get_object_or_404(Leader, pk=pk)
+    
+    if request.method == "POST":
+        leader.delete()
+        request.session["message_type"] = "success"
+        request.session["message"] = "Leader Deleted"
+        return redirect("dashboard:leader")
+    context = {
+        "object":leader
+    }
+    return render(request, template, context)

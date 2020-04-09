@@ -28,6 +28,7 @@
                             <td><p class="f2">{{leader.user.profile.full_name}}</p></td>
                             <td><p class="f2">{{leader.date|date:'D N j'}}</p>
                                 <a href="{% url 'dashboard:edit_leader' leader.pk %}"> <span class="fa fa-pencil"></span> Edit</a>
+                                <a class="text text-danger" href="{% url 'dashboard:delete_leader' leader.pk %}"><span class="fa fa-trash"></span> Delete</a>
                             </td>
                         </tr>
                         {% endfor %}

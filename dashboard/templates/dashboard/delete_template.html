@@ -4,7 +4,11 @@
         <div class="">
             <form action="" method="post" class="form" enctype="multipart/form-data">
                 {% csrf_token %}
+                {% if not object.file %}
+                <p class="text text-danger">Confirm deletion of leader object</p>
+                {% else %}
                 <p class="text text-danger">This action will permanently delete <strong>'{{object.file}}'</strong> from our servers</p>
+                {% endif %}
                 <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span> DELETE</button>
             </form>
         </div>
