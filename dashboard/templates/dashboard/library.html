@@ -28,6 +28,9 @@
                             <td><p class="f2">{{material.desc}}</p></td>
                             <td><p class="f2">{{material.date|date:'D N j'}}</p>
                                 <a href="{% url 'dashboard:edit_material' material.pk %}"> <span class="fa fa-pencil"></span> Edit</a>
+                                <a class="text text-danger" href="{% url 'dashboard:delete_material' material.pk %}"><span class="fa fa-trash"></span> Delete</a>
+
+
                             </td>
                         </tr>
                         {% endfor %}

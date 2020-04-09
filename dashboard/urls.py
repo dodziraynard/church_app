@@ -30,4 +30,8 @@ urlpatterns = [
     path("church_info", views.church_info, name="church_info"),
     path("sms", views.sms, name="sms"),
     path("testimony_list", views.testimony_list, name="testimony_list"),
+    
+    path("delete_video/<int:pk>", views.delete_video, name="delete_video"),
+    path("delete_audio/<int:pk>", views.delete_audio, name="delete_audio"),
+    path("delete_material/<int:pk>", views.delete_material, name="delete_material"),
 ]

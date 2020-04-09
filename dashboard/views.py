@@ -359,3 +359,48 @@ def testimony_list(request):
         "testimonies":Testimony.objects.filter(user__profile__church=request.user.profile.church).order_by("-id")
     }
     return render(request, template, context)
+
+@admins_only
+def delete_video(request, pk):
+    template = "dashboard/delete_template.html"
+    video = get_object_or_404(Video, pk=pk)
+    
+    if request.method == "POST":
+        video.delete()
+        request.session["message_type"] = "success"
+        request.session["message"] = "Video Deleted"
+        return redirect("dashboard:video")
+    context = {
+        "object":video
+    }
+    return render(request, template, context)
+
+@admins_only
+def delete_audio(request, pk):
+    template = "dashboard/delete_template.html"
+    audio = get_object_or_404(Audio, pk=pk)
+    
+    if request.method == "POST":
+        audio.delete()
+        request.session["message_type"] = "success"
+        request.session["message"] = "Audio Deleted"
+        return redirect("dashboard:audio")
+    context = {
+        "object":audio
+    }
+    return render(request, template, context)
+
+@admins_only
+def delete_material(request, pk):
+    template = "dashboard/delete_template.html"
+    material = get_object_or_404(Material, pk=pk)
+    
+    if request.method == "POST":
+        material.delete()
+        request.session["message_type"] = "success"
+        request.session["message"] = "Material Deleted"
+        return redirect("dashboard:library")
+    context = {
+        "object":material
+    }
+    return render(request, template, context)
