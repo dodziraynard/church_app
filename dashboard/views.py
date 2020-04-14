@@ -61,8 +61,10 @@ def notifications(request):
 
 @admins_only
 def prayer_request(request):
-    new_requests = PrayerRequest.objects.filter(viewed=False, user__profile__church=request.user.profile.church)
-    old_requests = PrayerRequest.objects.filter(viewed=True, user__profile__church=request.user.profile.church)
+    new_requests = PrayerRequest.objects.filter(viewed=False, 
+                user__profile__church=request.user.profile.church).order_by("-id")
+    old_requests = PrayerRequest.objects.filter(viewed=True, 
+                user__profile__church=request.user.profile.church).order_by("-id")
 
     context = {
         "new_requests":new_requests,
@@ -78,8 +80,10 @@ def view_request(request, pk):
 
 @admins_only
 def testimonies(request):
-    new_testimonies = Testimony.objects.filter(viewed=False, user__profile__church=request.user.profile.church)
-    old_testimonies = Testimony.objects.filter(viewed=True, user__profile__church=request.user.profile.church)
+    new_testimonies = Testimony.objects.filter(viewed=False, 
+                    user__profile__church=request.user.profile.church).order_by("-id")
+    old_testimonies = Testimony.objects.filter(viewed=True, 
+                    user__profile__church=request.user.profile.church).order_by("-id")
 
     context = {
         "new_testimonies":new_testimonies,
@@ -347,11 +351,6 @@ def church_info(request):
     return render(request, template, context)
 
 @admins_only
-def sms(request):
-    template = "dashboard/sms.html"
-    return render(request, template)
-
-@admins_only
 def testimony_list(request):
     template = "dashboard/testimony_list.html"
 
@@ -359,6 +358,21 @@ def testimony_list(request):
         "testimonies":Testimony.objects.filter(user__profile__church=request.user.profile.church).order_by("-id")
     }
     return render(request, template, context)
+
+@admins_only
+def transaction(request):
+    template = "dashboard/transaction.html"
+    return render(request, template)
+
+@xframe_options_exempt
+def donation(request):
+    template = "dashboard/donation.html"
+    return render(request, template)
+
+@admins_only
+def sms(request):
+    template = "dashboard/sms.html"
+    return render(request, template)
 
 @admins_only
 def delete_video(request, pk):

@@ -150,6 +150,12 @@
             <div class="title"><p>Leaders</p></div>
             </button>
         </a>
+        <a href="{% url 'dashboard:transaction' %}" class="">
+            <button class="ripple sidebar-item {% block transactions-active %} {% endblock transactions-active %}">
+            <div class="icon"><span class="fa fa-money"></span></div>
+            <div class="title"><p>Donations</p></div>
+            </button>
+        </a>
         <a href="{% url 'dashboard:church_info' %}" class="">
             <button class="ripple sidebar-item {% block info-active %} {% endblock info-active %}">
             <div class="icon"><span class="fa fa-info"></span></div>
@@ -174,7 +180,11 @@
 	<div class="content">
 	  <div class="navbar">
         <span id="toogleSidebar"><span class="fa fa-bars"></span></span>
-        <div class="" style="width: 80%;"><h4 style="font-weight: 500; margin-left: 10px;" class="text">{{request.user.profile.church|upper}}</h4></div>
+        <div class="" style="width: 80%;">
+            <a href="{% url 'dashboard:index' %}">
+                <h4 style="font-weight: 500; margin-left: 10px;" class="text">{{request.user.profile.church|upper}}</h4>
+            </a>
+        </div>
         <div class="navbar-right">
             <a href="{% url 'dashboard:prayer_request' %}">
                 <div class="notification-btn">

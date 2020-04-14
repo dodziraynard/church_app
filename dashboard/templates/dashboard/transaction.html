@@ -1,0 +1,11 @@
+{% extends "dashboard/base_template.html" %}
+{% block transactions-active %}sidebar-item-active{% endblock transactions-active %}
+{% block title %} Donations {% endblock title %}
+
+{% block body %}
+    <h4 class="bold"> <span class="fa fa-money"></span> DONATION</h4>
+    <hr>
+    <div class="center">
+       <a href="{% url 'dashboard:donation' %}"><h4 class="text text-secondary">View Page</h4></a>
+    </div>
+{% endblock body%}

@@ -1,11 +1,12 @@
 {% extends "dashboard/base_template.html" %}
 {% block notifications-active %}sidebar-item-active{% endblock notifications-active %}
+{% block title %} Notifications {% endblock title %}
 
 {% block body %}
     <h4 class="bold"> <span class="fa fa-bell"></span> NOTIFICATIONS</h4>
     <hr>
     <div class="center card">
-        <div class="header"><h4>Send New notification</h4></div>
+        <div class="header"><h4>Send New Notification</h4></div>
         <form action="{% url 'dashboard:notifications' %}" method="post" class="form">
             {% csrf_token %}
             <div class="row">
@@ -26,12 +27,12 @@
     <div class="center card">
         <div class="header"><h4>Previous Notifications</h4></div>
         <div class="section">
-            <table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
-                <thead style="position: sticky; top: 40px;">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <th class="th-md"><h4>Title</h4></th>
-                        <th class="th-md"><h4>Message</h4></th>
-                        <th class="th-md"><h4>Date</h4></th>
+                        <th><h4>Title</h4></th>
+                        <th><h4>Message</h4></th>
+                        <th><h4>Date</h4></th>
                     </tr>
                 </thead>
                 <tbody>

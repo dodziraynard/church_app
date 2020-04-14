@@ -98,6 +98,8 @@ class Church(models.Model):
     head_pastor    = models.CharField(max_length=100) 
     help_text      = models.TextField()
     church_id      = models.CharField(max_length=15, default="1")
+    momo           = models.CharField(max_length=15, null=True, blank=True)
+    contact        = models.CharField(max_length=15, null=True, blank=True)
 
     def __str__(self):
         return self.name

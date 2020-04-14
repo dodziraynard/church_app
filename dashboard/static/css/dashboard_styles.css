@@ -1,3 +1,20 @@
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: inherit;
+}
+
+.table {
+  table-layout: fixed;
+}
+
+.table-hover {
+  cursor: pointer;
+}
+
 .page {
   display: -webkit-box;
   display: -ms-flexbox;

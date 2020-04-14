@@ -78,11 +78,7 @@ class ChurchForm(forms.ModelForm):
             "address",
             "head_pastor",
             "help_text",
+            "momo",
+            "contact",
             "church_id",
         ]
-
-
-
-
-
-
