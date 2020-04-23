@@ -9,14 +9,10 @@
         <div class="">
             <form action="{% url 'dashboard:edit_audio' audio.pk %}" method="post" class="form" enctype="multipart/form-data">
                 <div class="form-group">
-                    <p>Current Thumbnail:</p>
-                    <img src="{{audio.image.url}}" alt="thumbnail" width="50" height="50">
-
                     <p>Current FILE:</p>
                     <p><strong>{{audio.file}}</strong></p>
                 </div>
                 {% csrf_token %}
-                {{form.media}}
                 {{form.as_p}}
                 <button type="submit" class="btn btn-secondary"><span class="fa fa-paper-plane"></span> UPDATE</button>
             </form>

@@ -49,9 +49,6 @@ class AudioForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     desc = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}), 
                         required=False, label="Description")
-    image = forms.FileField(widget=forms.FileInput(attrs={'class':'form-control'}), 
-                        required=False,
-                        label="Audio Thumbnail")
     file = forms.FileField(widget=forms.FileInput(attrs={'class':'form-control'}), 
                         required=False, label="Audio file (.mp3 only)")
 
@@ -59,8 +56,7 @@ class AudioForm(forms.ModelForm):
         model = Audio
         fields = [      "title",
                         "file",
-                        "desc",
-                        "image"]
+                        "desc"]
 
 class LeaderForm(forms.ModelForm):
     class Meta:

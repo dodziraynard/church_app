@@ -25,9 +25,8 @@
                             {% for audio in audios %}
                         <tr href="{{ audio.file.url }}">
                             <td> 
-                                <img src="{{ audio.image.url }}" height="50" width="50" alt="">
+                                <img src="/resources/assets/ic_audio.png" height="50" width="50" alt="">
                                 <span class="f2">{{audio.title}}</span>
-                               
                             </td>
                             <td><p class="f2">{{audio.desc}}</p></td>
                             <td><p class="f2">{{audio.date|date:'D N j, P'}}</p>
@@ -64,7 +63,6 @@
         <div class="modal-body">
             <form action="{% url 'dashboard:audio' %}" method="post" class="form" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{form.media}}
                 {{form.as_p}}
                 <button type="submit" class="btn btn-secondary"><span class="fa fa-paper-plane"></span> SUBMIT</button>
             </form>
