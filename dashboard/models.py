@@ -124,10 +124,10 @@ class DailyDevotion(models.Model):
         path = self.image.url
         return f"{domain}{path}"
     def __str__(self):
-        return self.verse
+        return self.title
 
     def __unicode__(self):
-        return self.verse
+        return self.title
 
 class Notification(models.Model):
     title   = models.CharField(max_length=100)

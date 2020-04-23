@@ -24,8 +24,11 @@
                         <tbody>
                             {% for audio in audios %}
                         <tr href="{{ audio.file.url }}">
-                            <td> <img src="{{ audio.image.url }}" height="50" width="50" alt="">
-                                <span class="f2">{{audio.title}}</span></td>
+                            <td> 
+                                <img src="{{ audio.image.url }}" height="50" width="50" alt="">
+                                <span class="f2">{{audio.title}}</span>
+                               
+                            </td>
                             <td><p class="f2">{{audio.desc}}</p></td>
                             <td><p class="f2">{{audio.date|date:'D N j, P'}}</p>
                                 <a href="{% url 'dashboard:edit_audio' audio.pk %}"> <span class="fa fa-pencil"></span> Edit</a>
