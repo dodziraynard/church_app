@@ -320,4 +320,8 @@ a:hover {
   top: 5px;
   font-size: 3em;
 }
+
+#cke_id_content {
+  width: 100% !important;
+}
 /*# sourceMappingURL=dashboard_styles.css.map */

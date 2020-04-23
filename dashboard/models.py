@@ -16,7 +16,7 @@ class ResourceMixin(models.Model):
     title  = models.CharField(max_length=100)
     desc  = models.TextField(null=True, blank=True)
     date  = models.DateTimeField(default=timezone.now)
-    image  = models.ImageField(upload_to="uploads/images")
+    image  = models.ImageField(upload_to="uploads/images", blank=True, null=True)
     church = models.ForeignKey("Church", on_delete=models.CASCADE) 
     file  = models.FileField(upload_to=content_file_name)
 
