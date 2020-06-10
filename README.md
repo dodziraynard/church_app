@@ -58,7 +58,7 @@ Once `pip` has finished downloading the dependencies, create administrator accou
 (env)$ python manage.py createsuperuser
 ```
 
-Then runser the server:
+Then run the server:
 ```sh
 (env)$ cd project
 (env)$ python manage.py runserver
